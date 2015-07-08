@@ -37,6 +37,7 @@
 		90BDED171B4D519F00A281DF /* MacControlClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacControlClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BDED1C1B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED1D1B4D519F00A281DF /* MacControlClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacControlClientTests.m; sourceTree = "<group>"; };
+		90BDED291B4D540D00A281DF /* icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.psd; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 		90BDED011B4D519F00A281DF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				90BDED291B4D540D00A281DF /* icon.psd */,
 				90BDED021B4D519F00A281DF /* Info.plist */,
 				90BDED031B4D519F00A281DF /* main.m */,
 			);
