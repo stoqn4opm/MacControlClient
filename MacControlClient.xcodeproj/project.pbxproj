@@ -13,6 +13,9 @@
 		90BDED0F1B4D519F00A281DF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED0E1B4D519F00A281DF /* Images.xcassets */; };
 		90BDED121B4D519F00A281DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED101B4D519F00A281DF /* LaunchScreen.xib */; };
 		90BDED1E1B4D519F00A281DF /* MacControlClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED1D1B4D519F00A281DF /* MacControlClientTests.m */; };
+		90BDED3A1B4D7DA500A281DF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED391B4D7DA500A281DF /* SWRevealViewController.m */; };
+		90BDED3E1B4D7E1200A281DF /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED3D1B4D7E1200A281DF /* MCMainViewController.m */; };
+		90BDED421B4D7E5B00A281DF /* MCSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED411B4D7E5B00A281DF /* MCSettingsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,12 @@
 		90BDED1C1B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED1D1B4D519F00A281DF /* MacControlClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacControlClientTests.m; sourceTree = "<group>"; };
 		90BDED291B4D540D00A281DF /* icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.psd; sourceTree = "<group>"; };
+		90BDED381B4D7DA500A281DF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		90BDED391B4D7DA500A281DF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		90BDED3C1B4D7E1200A281DF /* MCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMainViewController.h; path = UserInterface/MCMainViewController.h; sourceTree = "<group>"; };
+		90BDED3D1B4D7E1200A281DF /* MCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMainViewController.m; path = UserInterface/MCMainViewController.m; sourceTree = "<group>"; };
+		90BDED401B4D7E5B00A281DF /* MCSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSettingsTableViewController.h; path = UserInterface/MCSettingsTableViewController.h; sourceTree = "<group>"; };
+		90BDED411B4D7E5B00A281DF /* MCSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSettingsTableViewController.m; path = UserInterface/MCSettingsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +127,9 @@
 		90BDED271B4D530100A281DF /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				90BDED371B4D7D6C00A281DF /* Reveal ViewController */,
+				90BDED3B1B4D7DEA00A281DF /* Main */,
+				90BDED3F1B4D7E3F00A281DF /* Settings */,
 				90BDED0E1B4D519F00A281DF /* Images.xcassets */,
 				90BDED0B1B4D519F00A281DF /* Main.storyboard */,
 				90BDED101B4D519F00A281DF /* LaunchScreen.xib */,
@@ -130,6 +142,33 @@
 			children = (
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		90BDED371B4D7D6C00A281DF /* Reveal ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				90BDED381B4D7DA500A281DF /* SWRevealViewController.h */,
+				90BDED391B4D7DA500A281DF /* SWRevealViewController.m */,
+			);
+			name = "Reveal ViewController";
+			sourceTree = "<group>";
+		};
+		90BDED3B1B4D7DEA00A281DF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				90BDED3C1B4D7E1200A281DF /* MCMainViewController.h */,
+				90BDED3D1B4D7E1200A281DF /* MCMainViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		90BDED3F1B4D7E3F00A281DF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				90BDED401B4D7E5B00A281DF /* MCSettingsTableViewController.h */,
+				90BDED411B4D7E5B00A281DF /* MCSettingsTableViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,7 +273,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */,
+				90BDED3E1B4D7E1200A281DF /* MCMainViewController.m in Sources */,
 				90BDED041B4D519F00A281DF /* main.m in Sources */,
+				90BDED421B4D7E5B00A281DF /* MCSettingsTableViewController.m in Sources */,
+				90BDED3A1B4D7DA500A281DF /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +473,7 @@
 				90BDED231B4D519F00A281DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		90BDED241B4D519F00A281DF /* Build configuration list for PBXNativeTarget "MacControlClientTests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +482,7 @@
 				90BDED261B4D519F00A281DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
