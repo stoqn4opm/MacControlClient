@@ -9,7 +9,8 @@
 #import "MCMainViewController.h"
 #import "SWRevealViewController.h"
 
-@interface MCMainViewController ()
+@interface MCMainViewController () <UIGestureRecognizerDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *keyboardButton;
 
 @end
 
@@ -18,8 +19,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self _prepareUI];
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
+-(void)_prepareUI{
+    [self.keyboardButton.layer setCornerRadius:5];
+    [self.keyboardButton setClipsToBounds:YES];
+}
 @end
