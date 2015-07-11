@@ -8,10 +8,13 @@
 
 #import "MCMainViewController.h"
 #import "SWRevealViewController.h"
+#import "MCConnection.h"
 
 @interface MCMainViewController () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *keyboardButton;
 @property (weak, nonatomic) IBOutlet UIImageView *swipeField;
+
+@property (strong , nonatomic) MCConnection *connection;
 
 @end
 
@@ -54,7 +57,6 @@
         // move x of the cursor one unit backward
         NSLog(@"y -= 1");
     }
-    
 }
 
 #pragma mark - Touch Handling Helper functions

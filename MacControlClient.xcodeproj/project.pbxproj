@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E222BA91B51927A00E4B4B3 /* MCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E222BA81B51927A00E4B4B3 /* MCConnection.m */; };
+		5E222BAC1B51A8FC00E4B4B3 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E222BAB1B51A8FC00E4B4B3 /* AppManager.m */; };
+		5E222BB01B51AE3B00E4B4B3 /* NSString+MCRegExp.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E222BAF1B51AE3B00E4B4B3 /* NSString+MCRegExp.m */; };
 		90BDED041B4D519F00A281DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED031B4D519F00A281DF /* main.m */; };
 		90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED061B4D519F00A281DF /* AppDelegate.m */; };
 		90BDED0D1B4D519F00A281DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED0B1B4D519F00A281DF /* Main.storyboard */; };
@@ -29,6 +32,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E222BA71B51927A00E4B4B3 /* MCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCConnection.h; path = networking/MCConnection.h; sourceTree = "<group>"; };
+		5E222BA81B51927A00E4B4B3 /* MCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCConnection.m; path = networking/MCConnection.m; sourceTree = "<group>"; };
+		5E222BAA1B51A8FC00E4B4B3 /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
+		5E222BAB1B51A8FC00E4B4B3 /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
+		5E222BAE1B51AE3B00E4B4B3 /* NSString+MCRegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MCRegExp.h"; sourceTree = "<group>"; };
+		5E222BAF1B51AE3B00E4B4B3 /* NSString+MCRegExp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MCRegExp.m"; sourceTree = "<group>"; };
 		90BDECFE1B4D519F00A281DF /* MacControlClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacControlClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BDED021B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED031B4D519F00A281DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -93,6 +102,8 @@
 				90BDED281B4D531800A281DF /* Networking */,
 				90BDED271B4D530100A281DF /* User Interface */,
 				90BDED011B4D519F00A281DF /* Supporting Files */,
+				5E222BAA1B51A8FC00E4B4B3 /* AppManager.h */,
+				5E222BAB1B51A8FC00E4B4B3 /* AppManager.m */,
 			);
 			path = MacControlClient;
 			sourceTree = "<group>";
@@ -140,6 +151,10 @@
 		90BDED281B4D531800A281DF /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				5E222BA71B51927A00E4B4B3 /* MCConnection.h */,
+				5E222BA81B51927A00E4B4B3 /* MCConnection.m */,
+				5E222BAE1B51AE3B00E4B4B3 /* NSString+MCRegExp.h */,
+				5E222BAF1B51AE3B00E4B4B3 /* NSString+MCRegExp.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -276,7 +291,10 @@
 				90BDED3E1B4D7E1200A281DF /* MCMainViewController.m in Sources */,
 				90BDED041B4D519F00A281DF /* main.m in Sources */,
 				90BDED421B4D7E5B00A281DF /* MCSettingsTableViewController.m in Sources */,
+				5E222BB01B51AE3B00E4B4B3 /* NSString+MCRegExp.m in Sources */,
 				90BDED3A1B4D7DA500A281DF /* SWRevealViewController.m in Sources */,
+				5E222BAC1B51A8FC00E4B4B3 /* AppManager.m in Sources */,
+				5E222BA91B51927A00E4B4B3 /* MCConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
