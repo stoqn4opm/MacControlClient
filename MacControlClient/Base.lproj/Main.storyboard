@@ -73,6 +73,7 @@
                     </view>
                     <connections>
                         <outlet property="keyboardButton" destination="ujh-aI-s3u" id="FyR-xh-hBv"/>
+                        <outlet property="swipeField" destination="03J-M8-phv" id="iST-wU-sLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exu-t2-kkK" userLabel="First Responder" sceneMemberID="firstResponder"/>

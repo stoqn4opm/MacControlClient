@@ -11,6 +11,7 @@
 
 @interface MCMainViewController () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *keyboardButton;
+@property (weak, nonatomic) IBOutlet UIImageView *swipeField;
 
 @end
 
@@ -21,10 +22,63 @@
     // Do any additional setup after loading the view.
     [self _prepareUI];
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+
+    UIGestureRecognizer *mouseGestureRecognizer = [[UIGestureRecognizer alloc] init];
+    mouseGestureRecognizer.delegate = self;
+    [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
 }
 
 -(void)_prepareUI{
     [self.keyboardButton.layer setCornerRadius:5];
     [self.keyboardButton setClipsToBounds:YES];
+}
+
+#pragma mark - Touch Handling
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    CGPoint previousLocation = [self _calculateMeanPreviousLocationFromTouches:touches];
+    CGPoint currentLocation  = [self _calculateMeanLocationFromTouches:touches];
+    
+    if (currentLocation.x > previousLocation.x) {
+        // move x of the cursor one unit forward
+        NSLog(@"x += 1");
+    }else if (currentLocation.x < previousLocation.x){
+        // move x of the cursor one unit backward
+        NSLog(@"x -= 1");
+    }
+    
+    if (currentLocation.y > previousLocation.y) {
+        // move x of the cursor one unit forward
+        NSLog(@"y += 1");
+    }else if (currentLocation.y < previousLocation.y){
+        // move x of the cursor one unit backward
+        NSLog(@"y -= 1");
+    }
+    
+}
+
+#pragma mark - Touch Handling Helper functions
+-(CGPoint) _calculateMeanPreviousLocationFromTouches:(NSSet *)touches{
+    CGFloat __block prevX = 0;
+    CGFloat __block prevY = 0;
+    [touches enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        prevX += [obj previousLocationInView:self.swipeField].x;
+        prevY += [obj previousLocationInView:self.swipeField].y;
+    }];
+    prevX /= touches.count;
+    prevY /= touches.count;
+    return CGPointMake(prevX, prevY);
+}
+
+-(CGPoint) _calculateMeanLocationFromTouches:(NSSet *)touches{
+    CGFloat __block x = 0;
+    CGFloat __block y = 0;
+    [touches enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        x += [obj locationInView:self.swipeField].x;
+        y += [obj locationInView:self.swipeField].y;
+    }];
+    x /= touches.count;
+    y /= touches.count;
+    return CGPointMake(x, y);
 }
 @end
