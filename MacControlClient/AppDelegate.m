@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppManager.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[[AppManager sharedManager] clientSocket] connectToHost:@"200.200.200.240" onPort:PORT error:nil];
+
+//    for (int i = 0; i < 30; i++) {
+//        [[AppManager sharedManager] sendMoveRightMessage];
+//    }
+//    for (int i = 0; i < 30; i++) {
+//        [[AppManager sharedManager] sendMoveUpMessage];
+//    }
+//    for (int i = 0; i < 30; i++) {
+//        [[AppManager sharedManager] sendMoveLeftMessage];
+//    }
+//    for (int i = 0; i < 30; i++) {
+//        [[AppManager sharedManager] sendMoveDownMessage];
+//    }
     return YES;
 }
 

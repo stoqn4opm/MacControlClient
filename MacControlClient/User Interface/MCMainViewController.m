@@ -8,14 +8,11 @@
 
 #import "MCMainViewController.h"
 #import "SWRevealViewController.h"
-#import "MCConnection.h"
+#import "AppManager.h"
 
 @interface MCMainViewController () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *keyboardButton;
 @property (weak, nonatomic) IBOutlet UIImageView *swipeField;
-
-@property (strong , nonatomic) MCConnection *connection;
-
 @end
 
 @implementation MCMainViewController
@@ -24,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self _prepareUI];
-    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+   // [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 
     UIGestureRecognizer *mouseGestureRecognizer = [[UIGestureRecognizer alloc] init];
     mouseGestureRecognizer.delegate = self;
@@ -36,6 +33,7 @@
     [self.keyboardButton setClipsToBounds:YES];
 }
 
+
 #pragma mark - Touch Handling
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     
@@ -44,20 +42,21 @@
     
     if (currentLocation.x > previousLocation.x) {
         // move x of the cursor one unit forward
-        NSLog(@"x += 1");
-    }else if (currentLocation.x < previousLocation.x){
+        [[AppManager sharedManager] sendMoveRightMessages:SENSITIVITY];
+       }else if (currentLocation.x < previousLocation.x){
         // move x of the cursor one unit backward
-        NSLog(@"x -= 1");
+           [[AppManager sharedManager] sendMoveLeftMessages:SENSITIVITY];
     }
     
     if (currentLocation.y > previousLocation.y) {
-        // move x of the cursor one unit forward
-        NSLog(@"y += 1");
+        // move y of the cursor one unit forward
+        [[AppManager sharedManager] sendMoveDownMessages:SENSITIVITY];
     }else if (currentLocation.y < previousLocation.y){
-        // move x of the cursor one unit backward
-        NSLog(@"y -= 1");
+        // move y of the cursor one unit backward
+        [[AppManager sharedManager] sendMoveUpMessages:SENSITIVITY];
     }
 }
+
 
 #pragma mark - Touch Handling Helper functions
 -(CGPoint) _calculateMeanPreviousLocationFromTouches:(NSSet *)touches{

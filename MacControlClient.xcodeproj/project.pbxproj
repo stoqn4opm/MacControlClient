@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E222BA91B51927A00E4B4B3 /* MCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E222BA81B51927A00E4B4B3 /* MCConnection.m */; };
-		5E222BAC1B51A8FC00E4B4B3 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E222BAB1B51A8FC00E4B4B3 /* AppManager.m */; };
-		5E222BB01B51AE3B00E4B4B3 /* NSString+MCRegExp.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E222BAF1B51AE3B00E4B4B3 /* NSString+MCRegExp.m */; };
+		5E76E6401B54641400BFF407 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E76E63F1B54641400BFF407 /* Entitlements.plist */; };
+		5E7C8A081B5431A6009D4EDA /* NSString+MCRegExp.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A071B5431A6009D4EDA /* NSString+MCRegExp.m */; };
+		5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0A1B5431EB009D4EDA /* GCDAsyncSocket.m */; };
+		5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0D1B54322B009D4EDA /* AppManager.m */; };
+		5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */; };
+		5E7C8A141B543274009D4EDA /* MCSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A121B543274009D4EDA /* MCSettingsTableViewController.m */; };
 		90BDED041B4D519F00A281DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED031B4D519F00A281DF /* main.m */; };
 		90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED061B4D519F00A281DF /* AppDelegate.m */; };
 		90BDED0D1B4D519F00A281DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED0B1B4D519F00A281DF /* Main.storyboard */; };
@@ -17,8 +20,6 @@
 		90BDED121B4D519F00A281DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED101B4D519F00A281DF /* LaunchScreen.xib */; };
 		90BDED1E1B4D519F00A281DF /* MacControlClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED1D1B4D519F00A281DF /* MacControlClientTests.m */; };
 		90BDED3A1B4D7DA500A281DF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED391B4D7DA500A281DF /* SWRevealViewController.m */; };
-		90BDED3E1B4D7E1200A281DF /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED3D1B4D7E1200A281DF /* MCMainViewController.m */; };
-		90BDED421B4D7E5B00A281DF /* MCSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED411B4D7E5B00A281DF /* MCSettingsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,12 +33,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5E222BA71B51927A00E4B4B3 /* MCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCConnection.h; path = networking/MCConnection.h; sourceTree = "<group>"; };
-		5E222BA81B51927A00E4B4B3 /* MCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCConnection.m; path = networking/MCConnection.m; sourceTree = "<group>"; };
-		5E222BAA1B51A8FC00E4B4B3 /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
-		5E222BAB1B51A8FC00E4B4B3 /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
-		5E222BAE1B51AE3B00E4B4B3 /* NSString+MCRegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MCRegExp.h"; sourceTree = "<group>"; };
-		5E222BAF1B51AE3B00E4B4B3 /* NSString+MCRegExp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MCRegExp.m"; sourceTree = "<group>"; };
+		5E76E63F1B54641400BFF407 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		5E7C8A061B5431A6009D4EDA /* NSString+MCRegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MCRegExp.h"; path = "Class Extensions/NSString+MCRegExp.h"; sourceTree = "<group>"; };
+		5E7C8A071B5431A6009D4EDA /* NSString+MCRegExp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MCRegExp.m"; path = "Class Extensions/NSString+MCRegExp.m"; sourceTree = "<group>"; };
+		5E7C8A091B5431EB009D4EDA /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCDAsyncSocket/GCDAsyncSocket.h; sourceTree = "<group>"; };
+		5E7C8A0A1B5431EB009D4EDA /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = GCDAsyncSocket/GCDAsyncSocket.m; sourceTree = "<group>"; };
+		5E7C8A0C1B54322B009D4EDA /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppManager.h; path = "Application Manager/AppManager.h"; sourceTree = "<group>"; };
+		5E7C8A0D1B54322B009D4EDA /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppManager.m; path = "Application Manager/AppManager.m"; sourceTree = "<group>"; };
+		5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMainViewController.m; path = "User Interface/MCMainViewController.m"; sourceTree = "<group>"; };
+		5E7C8A101B543261009D4EDA /* MCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMainViewController.h; path = "User Interface/MCMainViewController.h"; sourceTree = "<group>"; };
+		5E7C8A121B543274009D4EDA /* MCSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSettingsTableViewController.m; path = "User Interface/MCSettingsTableViewController.m"; sourceTree = "<group>"; };
+		5E7C8A131B543274009D4EDA /* MCSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSettingsTableViewController.h; path = "User Interface/MCSettingsTableViewController.h"; sourceTree = "<group>"; };
 		90BDECFE1B4D519F00A281DF /* MacControlClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacControlClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BDED021B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED031B4D519F00A281DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,10 +58,6 @@
 		90BDED291B4D540D00A281DF /* icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.psd; sourceTree = "<group>"; };
 		90BDED381B4D7DA500A281DF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		90BDED391B4D7DA500A281DF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		90BDED3C1B4D7E1200A281DF /* MCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMainViewController.h; path = UserInterface/MCMainViewController.h; sourceTree = "<group>"; };
-		90BDED3D1B4D7E1200A281DF /* MCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMainViewController.m; path = UserInterface/MCMainViewController.m; sourceTree = "<group>"; };
-		90BDED401B4D7E5B00A281DF /* MCSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCSettingsTableViewController.h; path = UserInterface/MCSettingsTableViewController.h; sourceTree = "<group>"; };
-		90BDED411B4D7E5B00A281DF /* MCSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCSettingsTableViewController.m; path = UserInterface/MCSettingsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +78,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E7C8A021B542EBB009D4EDA /* Class Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5E7C8A061B5431A6009D4EDA /* NSString+MCRegExp.h */,
+				5E7C8A071B5431A6009D4EDA /* NSString+MCRegExp.m */,
+			);
+			name = "Class Extensions";
+			sourceTree = "<group>";
+		};
+		5E7C8A151B5432AD009D4EDA /* Application Managment */ = {
+			isa = PBXGroup;
+			children = (
+				5E7C8A0C1B54322B009D4EDA /* AppManager.h */,
+				5E7C8A0D1B54322B009D4EDA /* AppManager.m */,
+			);
+			name = "Application Managment";
+			sourceTree = "<group>";
+		};
 		90BDECF51B4D519F00A281DF = {
 			isa = PBXGroup;
 			children = (
+				5E76E63F1B54641400BFF407 /* Entitlements.plist */,
 				90BDED001B4D519F00A281DF /* MacControlClient */,
 				90BDED1A1B4D519F00A281DF /* MacControlClientTests */,
 				90BDECFF1B4D519F00A281DF /* Products */,
@@ -97,13 +118,13 @@
 		90BDED001B4D519F00A281DF /* MacControlClient */ = {
 			isa = PBXGroup;
 			children = (
+				5E7C8A151B5432AD009D4EDA /* Application Managment */,
 				90BDED051B4D519F00A281DF /* AppDelegate.h */,
 				90BDED061B4D519F00A281DF /* AppDelegate.m */,
-				90BDED281B4D531800A281DF /* Networking */,
+				5E7C8A021B542EBB009D4EDA /* Class Extensions */,
+				90BDED281B4D531800A281DF /* GCDAsyncSocket */,
 				90BDED271B4D530100A281DF /* User Interface */,
 				90BDED011B4D519F00A281DF /* Supporting Files */,
-				5E222BAA1B51A8FC00E4B4B3 /* AppManager.h */,
-				5E222BAB1B51A8FC00E4B4B3 /* AppManager.m */,
 			);
 			path = MacControlClient;
 			sourceTree = "<group>";
@@ -148,15 +169,13 @@
 			name = "User Interface";
 			sourceTree = "<group>";
 		};
-		90BDED281B4D531800A281DF /* Networking */ = {
+		90BDED281B4D531800A281DF /* GCDAsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				5E222BA71B51927A00E4B4B3 /* MCConnection.h */,
-				5E222BA81B51927A00E4B4B3 /* MCConnection.m */,
-				5E222BAE1B51AE3B00E4B4B3 /* NSString+MCRegExp.h */,
-				5E222BAF1B51AE3B00E4B4B3 /* NSString+MCRegExp.m */,
+				5E7C8A091B5431EB009D4EDA /* GCDAsyncSocket.h */,
+				5E7C8A0A1B5431EB009D4EDA /* GCDAsyncSocket.m */,
 			);
-			name = Networking;
+			name = GCDAsyncSocket;
 			sourceTree = "<group>";
 		};
 		90BDED371B4D7D6C00A281DF /* Reveal ViewController */ = {
@@ -171,8 +190,8 @@
 		90BDED3B1B4D7DEA00A281DF /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				90BDED3C1B4D7E1200A281DF /* MCMainViewController.h */,
-				90BDED3D1B4D7E1200A281DF /* MCMainViewController.m */,
+				5E7C8A101B543261009D4EDA /* MCMainViewController.h */,
+				5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -180,8 +199,8 @@
 		90BDED3F1B4D7E3F00A281DF /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				90BDED401B4D7E5B00A281DF /* MCSettingsTableViewController.h */,
-				90BDED411B4D7E5B00A281DF /* MCSettingsTableViewController.m */,
+				5E7C8A121B543274009D4EDA /* MCSettingsTableViewController.m */,
+				5E7C8A131B543274009D4EDA /* MCSettingsTableViewController.h */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -267,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E76E6401B54641400BFF407 /* Entitlements.plist in Resources */,
 				90BDED0D1B4D519F00A281DF /* Main.storyboard in Resources */,
 				90BDED121B4D519F00A281DF /* LaunchScreen.xib in Resources */,
 				90BDED0F1B4D519F00A281DF /* Images.xcassets in Resources */,
@@ -287,14 +307,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */,
+				5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */,
+				5E7C8A141B543274009D4EDA /* MCSettingsTableViewController.m in Sources */,
 				90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */,
-				90BDED3E1B4D7E1200A281DF /* MCMainViewController.m in Sources */,
 				90BDED041B4D519F00A281DF /* main.m in Sources */,
-				90BDED421B4D7E5B00A281DF /* MCSettingsTableViewController.m in Sources */,
-				5E222BB01B51AE3B00E4B4B3 /* NSString+MCRegExp.m in Sources */,
+				5E7C8A081B5431A6009D4EDA /* NSString+MCRegExp.m in Sources */,
 				90BDED3A1B4D7DA500A281DF /* SWRevealViewController.m in Sources */,
-				5E222BAC1B51A8FC00E4B4B3 /* AppManager.m in Sources */,
-				5E222BA91B51927A00E4B4B3 /* MCConnection.m in Sources */,
+				5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +373,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -372,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -397,7 +419,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -410,7 +434,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
