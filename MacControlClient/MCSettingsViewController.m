@@ -58,17 +58,11 @@
     [self setupRightClickButton];
     [self setupSetingsButton];
     [self setupKeyboardButton];
+    [self setupAddressInput];
+    [self setupKeboardResignOnLostFocus];
 }
 
--(void) setupSetingsButton{
-    [self.btnSettings setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *settingsTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(settingsTappedAction)];
-    [settingsTapped setNumberOfTapsRequired:1];
-    [settingsTapped setNumberOfTouchesRequired:1];
-    [self.btnSettings addGestureRecognizer:settingsTapped];
-}
-
+// Mouse clicks ************************************************************************************
 -(void)setupLeftClickButton{
     [self.btnLeftClick setUserInteractionEnabled:YES];
     UITapGestureRecognizer *leftClickTapped =
@@ -85,6 +79,17 @@
     [leftClickTapped setNumberOfTapsRequired:1];
     [leftClickTapped setNumberOfTouchesRequired:1];
     [self.btnRightClick addGestureRecognizer:leftClickTapped];
+}
+// End Mouse clicks ********************************************************************************
+
+// Toolbar Clicks **********************************************************************************
+-(void) setupSetingsButton{
+    [self.btnSettings setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *settingsTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(settingsTappedAction)];
+    [settingsTapped setNumberOfTapsRequired:1];
+    [settingsTapped setNumberOfTouchesRequired:1];
+    [self.btnSettings addGestureRecognizer:settingsTapped];
 }
 
 -(void)setupFullScreenButton{
@@ -114,15 +119,6 @@
     [self.btnClose addGestureRecognizer:closeTapped];
 }
 
--(void)setupAutoConnectButton{
-    [self.btnAutoConnect setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *autoconnectTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(autoConnectTappedAction)];
-    [autoconnectTapped setNumberOfTapsRequired:1];
-    [autoconnectTapped setNumberOfTouchesRequired:1];
-    [self.btnAutoConnect addGestureRecognizer:autoconnectTapped];
-}
-
 -(void)setupKeyboardButton{
     _kbInvoker = [UITextField new];
     _kbInvoker.delegate = self;
@@ -136,17 +132,42 @@
     [keyboardInvoke setNumberOfTouchesRequired:1];
     [self.btnKeyboard addGestureRecognizer:keyboardInvoke];
 }
+// End Toolbar Clicks ******************************************************************************
+
+// Settings Body Clicks ****************************************************************************
+-(void)setupAutoConnectButton{
+    [self.btnAutoConnect setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *autoconnectTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(autoConnectTappedAction)];
+    [autoconnectTapped setNumberOfTapsRequired:1];
+    [autoconnectTapped setNumberOfTouchesRequired:1];
+    [self.btnAutoConnect addGestureRecognizer:autoconnectTapped];
+}
 
 -(void)setupAddressInput{
     self.txtHost.delegate = self;
     self.txtPort.delegate = self;
+}
+
+-(void)setupConnectButton{
+    [self.btnConnection setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *connectionTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(connectionTappedAction)];
+    [connectionTapped setNumberOfTapsRequired:1];
+    [connectionTapped setNumberOfTouchesRequired:1];
+    [self.btnConnection addGestureRecognizer:connectionTapped];
+}
+// End Settings Body Clicks ************************************************************************
+
+
+-(void)setupKeboardResignOnLostFocus{
+    [self.view setUserInteractionEnabled:YES];
     UITapGestureRecognizer *loseFocusRecognizer =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignRespondersForTextInput)];
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignAllRespondersForTextInput)];
     [loseFocusRecognizer setNumberOfTapsRequired:1];
     [loseFocusRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:loseFocusRecognizer];
 }
-
 #pragma mark - User Interactions
 -(void)settingsTappedAction{
     [self.btnSettings setAlpha:0];
@@ -223,18 +244,67 @@
     [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
         [self.btnKeyboard setAlpha:1];
     }completion:^(BOOL finished) {
+
+        if ([self.txtHost isFirstResponder] || [self.txtPort isFirstResponder]) {
+            [self resignRespondersForTextInput];
+            return;
+        }
         if ([_kbInvoker isFirstResponder]) {
             [_kbInvoker resignFirstResponder];
-            [self resignRespondersForTextInput];
         }else{
             [_kbInvoker becomeFirstResponder];
         }
+
     }];
 }
 
 -(void)resignRespondersForTextInput{
     [self.txtHost resignFirstResponder];
     [self.txtPort resignFirstResponder];
+}
+
+-(void)resignAllRespondersForTextInput{
+    [self resignRespondersForTextInput];
+    [_kbInvoker resignFirstResponder];
+}
+
+-(void)connectionTappedAction{
+    [self.btnConnection setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.btnConnection setAlpha:1];
+    }completion:^(BOOL finished) {
+        if ([self.btnConnection.text isEqualToString:@"CONNECT"]) {
+            [self.lblStatus setTextColor:[UIColor yellowColor]];
+            [self.lblStatus setText:@"CONNECTING..."];
+            if ([[AppManager sharedManager] connectToHost:self.txtHost.text port:self.txtPort.text.integerValue]){
+                [self.lblStatus setTextColor:[UIColor greenColor]];
+                [self.lblStatus setText:@"CONNECTED"];
+                [self.btnConnection setText:@"DISCONNECT"];
+            }else{
+                
+                BOOL alertShownFlag = FALSE;
+                if (![self.txtHost.text  matchesRegEx:IP_REGEX]) {
+                    [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_IP_ENTERED];
+                    alertShownFlag = TRUE;
+                }
+                if (!(self.txtPort.text.integerValue > 0 && self.txtPort.text.integerValue < 65536)) {
+                    [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_PORT_ENTERED];
+                    alertShownFlag = TRUE;
+                }
+                
+                if (!alertShownFlag) {
+                    [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_CANNOT_CONNECT_TO_HOST];
+                }
+                [self.lblStatus setTextColor:[UIColor redColor]];
+                [self.lblStatus setText:@"NOT CONNECTED"];
+            }
+        }else if ([self.btnConnection.text isEqualToString:@"DISCONNECT"]){
+            [[AppManager sharedManager] disconnect];
+            [self.lblStatus setTextColor:[UIColor redColor]];
+            [self.lblStatus setText:@"NOT CONNECTED"];
+            [self.btnConnection setText:@"CONNECT"];
+        }
+    }];
 }
 
 #pragma mark - <UITextFieldDelegate> Methods
@@ -248,15 +318,29 @@ replacementString:(NSString *)string{
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-    if (textField == _kbInvoker) {
-        return YES;
-    }else if (textField == self.txtHost){
+    if (textField == self.txtHost){
         if ([textField.text  matchesRegEx:IP_REGEX]) {
             return YES;
         }else{
-            
+            [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_IP_ENTERED];
+            return YES;
+        }
+    }else if (textField == self.txtPort){
+        if (textField.text.integerValue > 0 && textField.text.integerValue < 65536) {
+            return YES;
+        }else{
+            [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_PORT_ENTERED];
+            return YES;
         }
     }
+    return YES;
+}
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    if (textField == self.txtHost || textField == self.txtPort) {
+        [textField resignFirstResponder];
+    }
+    return YES;
 }
 @end

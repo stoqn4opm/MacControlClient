@@ -46,6 +46,25 @@
 }
 
 
+#pragma mark - Connecting/Disconnecting to Host
+-(BOOL)connectToHost:(NSString *)host port:(NSInteger)port{
+    
+    if (![host matchesRegEx:IP_REGEX]) {
+        [self showAlertWithType:MCALERT_TYPE_INVALID_IP_ENTERED];
+        return NO;
+    }
+    if (port < 1 || port > 65535) {
+        [self showAlertWithType:MCALERT_TYPE_INVALID_PORT_ENTERED];
+        return NO;
+    }
+    return [self.clientSocket connectToHost:host onPort:port error:nil];
+}
+
+-(void)disconnect{
+    [self.clientSocket disconnect];
+}
+
+
 #pragma mark - Send Protocol Messages
 -(void)sendMoveUpMessages:(NSUInteger)count{
     for (int i = 0; i < count; i++) {
@@ -68,5 +87,25 @@
     for (int i = 0; i < count; i++) {
         [self.clientSocket writeData:[MOVE_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
     }
+}
+
+-(void)showAlertWithType:(MCAlertType)aType{
+   
+    UIAlertView *alert;
+    switch (aType) {
+        case MCALERT_TYPE_INVALID_IP_ENTERED:
+            alert = [[UIAlertView alloc] initWithTitle:@"HOST Error" message:@"You have entered an invalid host name or IP address" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            break;
+        case MCALERT_TYPE_INVALID_PORT_ENTERED:
+            alert = [[UIAlertView alloc] initWithTitle:@"PORT Error" message:@"You have entered an invalid port number. It has to match the port set on server. Valid port number is a number between 1 and 65 535." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            break;
+        case MCALERT_TYPE_CANNOT_CONNECT_TO_HOST:
+            alert = [[UIAlertView alloc] initWithTitle:@"Connection Error" message:@"Host is unreachable or desktop app is not running or selected port is busy. Try with other port." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            break;
+            
+        default:
+            break;
+    }
+    [alert show];
 }
 @end

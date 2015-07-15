@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "GCDAsyncSocket.h"
 
 // Config
@@ -28,10 +29,11 @@
 #define HOLD_RIGHT_MESSAGE      @"click:right=1\x0D\x0A"
 #define RELEASE_RIGHT_MESSAGE   @"click:right=0\x0D\x0A"
 
-// Alert types
+// Alert types used in showAlertWithType:
 typedef enum{
     MCALERT_TYPE_INVALID_IP_ENTERED,
-    MCALERT_TYPE_INVALID_PORT_ENTERED
+    MCALERT_TYPE_INVALID_PORT_ENTERED,
+    MCALERT_TYPE_CANNOT_CONNECT_TO_HOST
 }MCAlertType;
 
 @interface AppManager : NSObject <GCDAsyncSocketDelegate>
@@ -42,7 +44,8 @@ typedef enum{
 @property  int16_t port;
 
 @property (nonatomic, strong) GCDAsyncSocket *clientSocket;
-
+-(BOOL)connectToHost:(NSString *)host port:(NSInteger)port;
+-(void)disconnect;
 -(void)sendMoveUpMessages:(NSUInteger)count;
 -(void)sendMoveDownMessages:(NSUInteger)count;
 -(void)sendMoveLeftMessages:(NSUInteger)count;
