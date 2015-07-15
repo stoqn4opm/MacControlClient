@@ -159,10 +159,10 @@
 		90BDED271B4D530100A281DF /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */,
 				90BDED3B1B4D7DEA00A281DF /* Main */,
 				90BDED3F1B4D7E3F00A281DF /* Settings */,
 				90BDED0E1B4D519F00A281DF /* Images.xcassets */,
+				5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */,
 				90BDED0B1B4D519F00A281DF /* Main.storyboard */,
 				90BDED101B4D519F00A281DF /* LaunchScreen.xib */,
 			);

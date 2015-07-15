@@ -28,6 +28,11 @@
 #define HOLD_RIGHT_MESSAGE      @"click:right=1\x0D\x0A"
 #define RELEASE_RIGHT_MESSAGE   @"click:right=0\x0D\x0A"
 
+// Alert types
+typedef enum{
+    MCALERT_TYPE_INVALID_IP_ENTERED,
+    MCALERT_TYPE_INVALID_PORT_ENTERED
+}MCAlertType;
 
 @interface AppManager : NSObject <GCDAsyncSocketDelegate>
 
@@ -43,10 +48,13 @@
 -(void)sendMoveLeftMessages:(NSUInteger)count;
 -(void)sendMoveRightMessages:(NSUInteger)count;
 
+-(void)sendKeyTyped:(char)key;
 -(void)sendCloseWindowMessage;
 -(void)sendMinimizeWindowMessage;
 -(void)sendFullscreenWindowMessage;
 
 -(void)sendLeftClickMessage;
 -(void)sendRightClickMessage;
+
+-(void)showAlertWithType:(MCAlertType)aType;
 @end

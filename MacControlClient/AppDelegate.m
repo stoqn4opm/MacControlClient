@@ -32,6 +32,8 @@
 //    for (int i = 0; i < 30; i++) {
 //        [[AppManager sharedManager] sendMoveDownMessage];
 //    }
+        char c = [@"dfggdfgsd" characterAtIndex:0];
+    NSLog(@"%c",c);
     return YES;
 }
 

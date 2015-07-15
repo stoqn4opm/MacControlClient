@@ -9,8 +9,11 @@
 #import "MCSettingsViewController.h"
 #import "MCIconTapHandler.h"
 #import "AppManager.h"
+#import "NSString+MCRegExp.h"
 
-@interface MCSettingsViewController ()
+@interface MCSettingsViewController () <UITextFieldDelegate>{
+    UITextField *_kbInvoker;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *btnClose;
 @property (weak, nonatomic) IBOutlet UIImageView *btnMinimize;
 @property (weak, nonatomic) IBOutlet UIImageView *btnFullScreen;
@@ -43,6 +46,9 @@
     [self setupUserInteraction];
 }
 
+#pragma mark - UI Prep methods
+
+
 -(void)setupUserInteraction{
     [self setupAutoConnectButton];
     [self setupCloseButton];
@@ -51,6 +57,7 @@
     [self setupMinimizeButton];
     [self setupRightClickButton];
     [self setupSetingsButton];
+    [self setupKeyboardButton];
 }
 
 -(void) setupSetingsButton{
@@ -74,7 +81,7 @@
 -(void)setupRightClickButton{
     [self.btnRightClick setUserInteractionEnabled:YES];
     UITapGestureRecognizer *leftClickTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftClickTappedAction)];
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightClickTappedAction)];
     [leftClickTapped setNumberOfTapsRequired:1];
     [leftClickTapped setNumberOfTouchesRequired:1];
     [self.btnRightClick addGestureRecognizer:leftClickTapped];
@@ -88,6 +95,7 @@
     [fullscreenTapped setNumberOfTouchesRequired:1];
     [self.btnRightClick addGestureRecognizer:fullscreenTapped];
 }
+
 -(void)setupMinimizeButton{
     [self.btnMinimize setUserInteractionEnabled:YES];
     UITapGestureRecognizer *minimizeTapped =
@@ -105,6 +113,7 @@
     [closeTapped setNumberOfTouchesRequired:1];
     [self.btnClose addGestureRecognizer:closeTapped];
 }
+
 -(void)setupAutoConnectButton{
     [self.btnAutoConnect setUserInteractionEnabled:YES];
     UITapGestureRecognizer *autoconnectTapped =
@@ -112,6 +121,30 @@
     [autoconnectTapped setNumberOfTapsRequired:1];
     [autoconnectTapped setNumberOfTouchesRequired:1];
     [self.btnAutoConnect addGestureRecognizer:autoconnectTapped];
+}
+
+-(void)setupKeyboardButton{
+    _kbInvoker = [UITextField new];
+    _kbInvoker.delegate = self;
+    [_kbInvoker setKeyboardAppearance:UIKeyboardAppearanceDark];
+    [self.view addSubview:_kbInvoker];
+    
+    [self.btnKeyboard setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *keyboardInvoke =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardTappedAction)];
+    [keyboardInvoke setNumberOfTapsRequired:1];
+    [keyboardInvoke setNumberOfTouchesRequired:1];
+    [self.btnKeyboard addGestureRecognizer:keyboardInvoke];
+}
+
+-(void)setupAddressInput{
+    self.txtHost.delegate = self;
+    self.txtPort.delegate = self;
+    UITapGestureRecognizer *loseFocusRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignRespondersForTextInput)];
+    [loseFocusRecognizer setNumberOfTapsRequired:1];
+    [loseFocusRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:loseFocusRecognizer];
 }
 
 #pragma mark - User Interactions
@@ -183,5 +216,47 @@
     }completion:^(BOOL finished) {
 #warning implement autoconnect logic
     }];
+}
+
+-(void)keyboardTappedAction{
+    [self.btnKeyboard setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.btnKeyboard setAlpha:1];
+    }completion:^(BOOL finished) {
+        if ([_kbInvoker isFirstResponder]) {
+            [_kbInvoker resignFirstResponder];
+            [self resignRespondersForTextInput];
+        }else{
+            [_kbInvoker becomeFirstResponder];
+        }
+    }];
+}
+
+-(void)resignRespondersForTextInput{
+    [self.txtHost resignFirstResponder];
+    [self.txtPort resignFirstResponder];
+}
+
+#pragma mark - <UITextFieldDelegate> Methods
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string{
+    if (textField == _kbInvoker) {
+        [[AppManager sharedManager] sendKeyTyped:[string characterAtIndex:0]];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    if (textField == _kbInvoker) {
+        return YES;
+    }else if (textField == self.txtHost){
+        if ([textField.text  matchesRegEx:IP_REGEX]) {
+            return YES;
+        }else{
+            
+        }
+    }
+
 }
 @end
