@@ -7,12 +7,18 @@
 //
 
 #import "MCMainViewController.h"
-#import "SWRevealViewController.h"
 #import "AppManager.h"
+#import "MCIconTapHandler.h"
 
-@interface MCMainViewController () <UIGestureRecognizerDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *keyboardButton;
+@interface MCMainViewController () <UIGestureRecognizerDelegate, MCIconTapHandlerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *swipeField;
+@property (weak, nonatomic) IBOutlet UIImageView *btnCloseWindow;
+@property (weak, nonatomic) IBOutlet UIImageView *btnMinimizeWindow;
+@property (weak, nonatomic) IBOutlet UIImageView *btnFullScreenWindow;
+@property (weak, nonatomic) IBOutlet UIImageView *btnKeyboard;
+@property (weak, nonatomic) IBOutlet UIImageView *btnSettings;
+@property (strong , nonatomic) MCIconTapHandler  *tapHandler;
 @end
 
 @implementation MCMainViewController
@@ -21,18 +27,65 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self _prepareUI];
-   // [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 
-    UIGestureRecognizer *mouseGestureRecognizer = [[UIGestureRecognizer alloc] init];
+    UIGestureRecognizer *mouseGestureRecognizer = [UIGestureRecognizer new];
     mouseGestureRecognizer.delegate = self;
     [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
 }
 
 -(void)_prepareUI{
-    [self.keyboardButton.layer setCornerRadius:5];
-    [self.keyboardButton setClipsToBounds:YES];
+    
+    [self.btnSettings           setUserInteractionEnabled:YES];
+    [self.btnMinimizeWindow     setUserInteractionEnabled:YES];
+    [self.btnKeyboard           setUserInteractionEnabled:YES];
+    [self.btnFullScreenWindow   setUserInteractionEnabled:YES];
+    [self.btnCloseWindow        setUserInteractionEnabled:YES];
+    
+    [self _setupToolbarIcons];
+    
+    
 }
 
+-(void)_setupToolbarIcons{
+    UITapGestureRecognizer *settingsTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(settingsTapped)];
+    [settingsTapped setNumberOfTapsRequired:1];
+    [settingsTapped setNumberOfTouchesRequired:1];
+    [self.btnSettings addGestureRecognizer:settingsTapped];
+    
+    UITapGestureRecognizer *closeWindowTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(closeWindowTapped)];
+    [settingsTapped setNumberOfTapsRequired:1];
+    [settingsTapped setNumberOfTouchesRequired:1];
+    [self.btnCloseWindow addGestureRecognizer:closeWindowTapped];
+    
+    UITapGestureRecognizer *minimizeWindowTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(minimizeWindowTapped)];
+    [settingsTapped setNumberOfTapsRequired:1];
+    [settingsTapped setNumberOfTouchesRequired:1];
+    [self.btnMinimizeWindow addGestureRecognizer:minimizeWindowTapped];
+    
+    UITapGestureRecognizer *fullscreenWindowTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(fullscreenWindowTapped)];
+    [settingsTapped setNumberOfTapsRequired:1];
+    [settingsTapped setNumberOfTouchesRequired:1];
+    [self.btnFullScreenWindow addGestureRecognizer:fullscreenWindowTapped];
+    
+    UITapGestureRecognizer *keyboardTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(keyboardTapped)];
+    [settingsTapped setNumberOfTapsRequired:1];
+    [settingsTapped setNumberOfTouchesRequired:1];
+    [self.btnKeyboard addGestureRecognizer:keyboardTapped];
+}
+
+-(MCIconTapHandler *)tapHandler{
+    if (_tapHandler) {
+        return _tapHandler;
+    }
+    _tapHandler = [MCIconTapHandler new];
+    _tapHandler.delegate = self;
+    return _tapHandler;
+}
 
 #pragma mark - Touch Handling
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -81,5 +134,11 @@
     x /= touches.count;
     y /= touches.count;
     return CGPointMake(x, y);
+}
+
+
+#pragma mark - <MCIconTapHandlerDelegate> Methods
+-(void)presentSettings{
+    [self performSegueWithIdentifier:@"SettingsSegue" sender:nil];
 }
 @end

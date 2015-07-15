@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5E76E6401B54641400BFF407 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E76E63F1B54641400BFF407 /* Entitlements.plist */; };
+		5E76E6471B55436300BFF407 /* MCIconTapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E76E6461B55436300BFF407 /* MCIconTapHandler.m */; };
+		5E76E6491B55742B00BFF407 /* Eurostile-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */; };
 		5E7C8A081B5431A6009D4EDA /* NSString+MCRegExp.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A071B5431A6009D4EDA /* NSString+MCRegExp.m */; };
 		5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0A1B5431EB009D4EDA /* GCDAsyncSocket.m */; };
 		5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0D1B54322B009D4EDA /* AppManager.m */; };
@@ -19,7 +21,6 @@
 		90BDED0F1B4D519F00A281DF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED0E1B4D519F00A281DF /* Images.xcassets */; };
 		90BDED121B4D519F00A281DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED101B4D519F00A281DF /* LaunchScreen.xib */; };
 		90BDED1E1B4D519F00A281DF /* MacControlClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED1D1B4D519F00A281DF /* MacControlClientTests.m */; };
-		90BDED3A1B4D7DA500A281DF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED391B4D7DA500A281DF /* SWRevealViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,9 @@
 
 /* Begin PBXFileReference section */
 		5E76E63F1B54641400BFF407 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		5E76E6451B55436300BFF407 /* MCIconTapHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCIconTapHandler.h; path = "User Interface/MCIconTapHandler.h"; sourceTree = "<group>"; };
+		5E76E6461B55436300BFF407 /* MCIconTapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCIconTapHandler.m; path = "User Interface/MCIconTapHandler.m"; sourceTree = "<group>"; };
+		5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Eurostile-Normal.ttf"; sourceTree = "<group>"; };
 		5E7C8A061B5431A6009D4EDA /* NSString+MCRegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MCRegExp.h"; path = "Class Extensions/NSString+MCRegExp.h"; sourceTree = "<group>"; };
 		5E7C8A071B5431A6009D4EDA /* NSString+MCRegExp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MCRegExp.m"; path = "Class Extensions/NSString+MCRegExp.m"; sourceTree = "<group>"; };
 		5E7C8A091B5431EB009D4EDA /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCDAsyncSocket/GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -55,9 +59,6 @@
 		90BDED171B4D519F00A281DF /* MacControlClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacControlClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BDED1C1B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED1D1B4D519F00A281DF /* MacControlClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacControlClientTests.m; sourceTree = "<group>"; };
-		90BDED291B4D540D00A281DF /* icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.psd; sourceTree = "<group>"; };
-		90BDED381B4D7DA500A281DF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		90BDED391B4D7DA500A281DF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +133,6 @@
 		90BDED011B4D519F00A281DF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				90BDED291B4D540D00A281DF /* icon.psd */,
 				90BDED021B4D519F00A281DF /* Info.plist */,
 				90BDED031B4D519F00A281DF /* main.m */,
 			);
@@ -159,7 +159,7 @@
 		90BDED271B4D530100A281DF /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				90BDED371B4D7D6C00A281DF /* Reveal ViewController */,
+				5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */,
 				90BDED3B1B4D7DEA00A281DF /* Main */,
 				90BDED3F1B4D7E3F00A281DF /* Settings */,
 				90BDED0E1B4D519F00A281DF /* Images.xcassets */,
@@ -178,20 +178,13 @@
 			name = GCDAsyncSocket;
 			sourceTree = "<group>";
 		};
-		90BDED371B4D7D6C00A281DF /* Reveal ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				90BDED381B4D7DA500A281DF /* SWRevealViewController.h */,
-				90BDED391B4D7DA500A281DF /* SWRevealViewController.m */,
-			);
-			name = "Reveal ViewController";
-			sourceTree = "<group>";
-		};
 		90BDED3B1B4D7DEA00A281DF /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				5E7C8A101B543261009D4EDA /* MCMainViewController.h */,
 				5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */,
+				5E76E6451B55436300BFF407 /* MCIconTapHandler.h */,
+				5E76E6461B55436300BFF407 /* MCIconTapHandler.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -287,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E76E6401B54641400BFF407 /* Entitlements.plist in Resources */,
+				5E76E6491B55742B00BFF407 /* Eurostile-Normal.ttf in Resources */,
 				90BDED0D1B4D519F00A281DF /* Main.storyboard in Resources */,
 				90BDED121B4D519F00A281DF /* LaunchScreen.xib in Resources */,
 				90BDED0F1B4D519F00A281DF /* Images.xcassets in Resources */,
@@ -308,12 +302,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */,
+				5E76E6471B55436300BFF407 /* MCIconTapHandler.m in Sources */,
 				5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */,
 				5E7C8A141B543274009D4EDA /* MCSettingsTableViewController.m in Sources */,
 				90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */,
 				90BDED041B4D519F00A281DF /* main.m in Sources */,
 				5E7C8A081B5431A6009D4EDA /* NSString+MCRegExp.m in Sources */,
-				90BDED3A1B4D7DA500A281DF /* SWRevealViewController.m in Sources */,
 				5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

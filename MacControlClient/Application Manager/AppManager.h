@@ -40,4 +40,8 @@
 -(void)sendMoveDownMessages:(NSUInteger)count;
 -(void)sendMoveLeftMessages:(NSUInteger)count;
 -(void)sendMoveRightMessages:(NSUInteger)count;
+
+-(void)sendCloseWindowMessage;
+-(void)sendMinimizeWindowMessage;
+-(void)sendFullscreenWindowMessage;
 @end
