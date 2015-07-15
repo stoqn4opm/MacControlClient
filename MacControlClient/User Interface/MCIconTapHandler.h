@@ -10,8 +10,9 @@
 
 @protocol MCIconTapHandlerDelegate <NSObject>
 
+@optional
 -(void)presentSettings;
-
+-(void)dismissSettings;
 @end
 
 @interface MCIconTapHandler : NSObject

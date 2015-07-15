@@ -14,6 +14,8 @@
 #define PORT    2222
 #define IP_REGEX @"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
 #define SENSITIVITY 10
+#define HIGHLIGHT_TIME 0.5f
+
 // Communication Protocol
 #define MESSAGE_SEPERATOR [GCDAsyncSocket CRLFData]
 
@@ -44,4 +46,7 @@
 -(void)sendCloseWindowMessage;
 -(void)sendMinimizeWindowMessage;
 -(void)sendFullscreenWindowMessage;
+
+-(void)sendLeftClickMessage;
+-(void)sendRightClickMessage;
 @end

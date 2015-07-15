@@ -8,6 +8,8 @@
 
 #import "MCIconTapHandler.h"
 #import "AppManager.h"
+#import "MCMainViewController.h"
+#import "MCSettingsViewController.h"
 
 @implementation MCIconTapHandler
 
@@ -25,6 +27,10 @@
     // and make that keyboard send key press messages
 }
 -(void)settingsTapped{
-    [self.delegate presentSettings];
+    if ([self.delegate isKindOfClass:[MCMainViewController class]]) {
+        [self.delegate presentSettings];
+    }else if ([self.delegate isKindOfClass:[MCSettingsViewController class]]){
+        [self.delegate dismissSettings];
+    }
 }
 @end
