@@ -10,6 +10,7 @@
 		5E76E6401B54641400BFF407 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E76E63F1B54641400BFF407 /* Entitlements.plist */; };
 		5E76E6471B55436300BFF407 /* MCIconTapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E76E6461B55436300BFF407 /* MCIconTapHandler.m */; };
 		5E76E6491B55742B00BFF407 /* Eurostile-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */; };
+		5E76E64C1B563DF300BFF407 /* MCSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E76E64B1B563DF300BFF407 /* MCSettingsViewController.m */; };
 		5E7C8A081B5431A6009D4EDA /* NSString+MCRegExp.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A071B5431A6009D4EDA /* NSString+MCRegExp.m */; };
 		5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0A1B5431EB009D4EDA /* GCDAsyncSocket.m */; };
 		5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0D1B54322B009D4EDA /* AppManager.m */; };
@@ -38,6 +39,8 @@
 		5E76E6451B55436300BFF407 /* MCIconTapHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCIconTapHandler.h; path = "User Interface/MCIconTapHandler.h"; sourceTree = "<group>"; };
 		5E76E6461B55436300BFF407 /* MCIconTapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCIconTapHandler.m; path = "User Interface/MCIconTapHandler.m"; sourceTree = "<group>"; };
 		5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Eurostile-Normal.ttf"; sourceTree = "<group>"; };
+		5E76E64A1B563DF300BFF407 /* MCSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSettingsViewController.h; sourceTree = "<group>"; };
+		5E76E64B1B563DF300BFF407 /* MCSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSettingsViewController.m; sourceTree = "<group>"; };
 		5E7C8A061B5431A6009D4EDA /* NSString+MCRegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MCRegExp.h"; path = "Class Extensions/NSString+MCRegExp.h"; sourceTree = "<group>"; };
 		5E7C8A071B5431A6009D4EDA /* NSString+MCRegExp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MCRegExp.m"; path = "Class Extensions/NSString+MCRegExp.m"; sourceTree = "<group>"; };
 		5E7C8A091B5431EB009D4EDA /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = GCDAsyncSocket/GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 			children = (
 				5E7C8A121B543274009D4EDA /* MCSettingsTableViewController.m */,
 				5E7C8A131B543274009D4EDA /* MCSettingsTableViewController.h */,
+				5E76E64A1B563DF300BFF407 /* MCSettingsViewController.h */,
+				5E76E64B1B563DF300BFF407 /* MCSettingsViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */,
+				5E76E64C1B563DF300BFF407 /* MCSettingsViewController.m in Sources */,
 				5E76E6471B55436300BFF407 /* MCIconTapHandler.m in Sources */,
 				5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */,
 				5E7C8A141B543274009D4EDA /* MCSettingsTableViewController.m in Sources */,
