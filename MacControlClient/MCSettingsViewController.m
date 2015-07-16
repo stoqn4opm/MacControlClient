@@ -60,6 +60,7 @@
     [self setupKeyboardButton];
     [self setupAddressInput];
     [self setupKeboardResignOnLostFocus];
+    [self setupConnectButton];
 }
 
 // Mouse clicks ************************************************************************************
@@ -280,6 +281,19 @@
                 [self.lblStatus setTextColor:[UIColor greenColor]];
                 [self.lblStatus setText:@"CONNECTED"];
                 [self.btnConnection setText:@"DISCONNECT"];
+                [[AppManager sharedManager] setConnected:YES];
+                for (int i = 0; i < 30; i++) {
+                    [[AppManager sharedManager] sendMoveRightMessages:SENSITIVITY];
+                }
+                for (int i = 0; i < 30; i++) {
+                    [[AppManager sharedManager] sendMoveUpMessages:SENSITIVITY];
+                }
+                for (int i = 0; i < 30; i++) {
+                    [[AppManager sharedManager] sendMoveLeftMessages:SENSITIVITY];
+                }
+                for (int i = 0; i < 30; i++) {
+                    [[AppManager sharedManager] sendMoveDownMessages:SENSITIVITY];
+                }
             }else{
                 
                 BOOL alertShownFlag = FALSE;
@@ -303,10 +317,29 @@
             [self.lblStatus setTextColor:[UIColor redColor]];
             [self.lblStatus setText:@"NOT CONNECTED"];
             [self.btnConnection setText:@"CONNECT"];
+            [[AppManager sharedManager] setConnected:NO];
         }
     }];
 }
+-(void)goIntoConnectedState{
+    [self.lblStatus setTextColor:[UIColor greenColor]];
+    [self.lblStatus setText:@"CONNECTED"];
+    [self.btnConnection setText:@"DISCONNECT"];
+    [self.txtHost setUserInteractionEnabled:NO];
+    [self.txtHost setTextColor:[UIColor grayColor]];
+    [self.txtPort setUserInteractionEnabled:NO];
+    [self.txtPort setTextColor:[UIColor grayColor]];
+}
 
+-(void)goIntoDisconnectedState{
+    [self.lblStatus setTextColor:[UIColor redColor]];
+    [self.lblStatus setText:@"NOT CONNECTED"];
+    [self.btnConnection setText:@"CONNECT"];
+    [self.txtHost setUserInteractionEnabled:YES];
+    [self.txtHost setTextColor:[UIColor whiteColor]];
+    [self.txtPort setUserInteractionEnabled:YES];
+    [self.txtPort setTextColor:[UIColor whiteColor]];
+}
 #pragma mark - <UITextFieldDelegate> Methods
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range

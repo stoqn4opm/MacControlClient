@@ -12,7 +12,7 @@
 
 @interface MCMainViewController () <UIGestureRecognizerDelegate, MCIconTapHandlerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *swipeField;
+@property (strong, nonatomic) UIView *swipeField;
 @property (weak, nonatomic) IBOutlet UIImageView *btnCloseWindow;
 @property (weak, nonatomic) IBOutlet UIImageView *btnMinimizeWindow;
 @property (weak, nonatomic) IBOutlet UIImageView *btnFullScreenWindow;
@@ -27,7 +27,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self _prepareUI];
-
+    [self.view setUserInteractionEnabled:YES];
+    self.swipeField = self.view;
     UIGestureRecognizer *mouseGestureRecognizer = [UIGestureRecognizer new];
     mouseGestureRecognizer.delegate = self;
     [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
