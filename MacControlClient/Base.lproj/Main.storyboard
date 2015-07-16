@@ -169,12 +169,19 @@
                                     <constraint firstItem="XMI-au-oYx" firstAttribute="height" secondItem="qgJ-pp-s8u" secondAttribute="height" id="rA3-tj-lcf"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="efa-dM-7av">
+                                <rect key="frame" x="16" y="72" width="568" height="427"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.023529411760000001" green="0.10980392160000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LlI-jh-gf1" firstAttribute="leading" secondItem="RX2-3W-HXn" secondAttribute="leadingMargin" constant="-16" id="1pC-mb-pwl"/>
+                            <constraint firstItem="efa-dM-7av" firstAttribute="top" secondItem="v3x-y8-7sM" secondAttribute="bottom" constant="8" id="6I4-i5-Ala"/>
                             <constraint firstAttribute="trailingMargin" secondItem="v3x-y8-7sM" secondAttribute="trailing" constant="-16" id="Fx7-n6-NoA"/>
+                            <constraint firstItem="LlI-jh-gf1" firstAttribute="top" secondItem="efa-dM-7av" secondAttribute="bottom" constant="8" id="Lqh-QM-3JL"/>
                             <constraint firstItem="v3x-y8-7sM" firstAttribute="top" secondItem="puh-Oq-LGb" secondAttribute="bottom" id="SQS-EA-PyL"/>
+                            <constraint firstItem="efa-dM-7av" firstAttribute="leading" secondItem="RX2-3W-HXn" secondAttribute="leadingMargin" id="Z4w-gh-qrf"/>
+                            <constraint firstItem="efa-dM-7av" firstAttribute="trailing" secondItem="RX2-3W-HXn" secondAttribute="trailingMargin" id="cKZ-Mi-m1i"/>
                             <constraint firstItem="boZ-5x-3Qm" firstAttribute="top" secondItem="LlI-jh-gf1" secondAttribute="bottom" id="fuZ-95-Z2C"/>
                             <constraint firstItem="v3x-y8-7sM" firstAttribute="leading" secondItem="RX2-3W-HXn" secondAttribute="leadingMargin" constant="-16" id="rtV-HE-Qwd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LlI-jh-gf1" secondAttribute="trailing" constant="-16" id="w5n-AW-OEe"/>
@@ -187,7 +194,8 @@
                         <outlet property="btnKeyboard" destination="a2C-gn-lbD" id="hDN-95-lop"/>
                         <outlet property="btnMinimizeWindow" destination="OlY-h5-7HW" id="LFN-fJ-JhY"/>
                         <outlet property="btnSettings" destination="mzX-3P-MJV" id="33C-wG-CuT"/>
-                        <segue destination="L7N-hw-ICa" kind="presentation" identifier="SettingsSegue" modalTransitionStyle="flipHorizontal" id="UUE-j3-mUt"/>
+                        <outlet property="swipeField" destination="efa-dM-7av" id="KDJ-kW-zBE"/>
+                        <segue destination="L7N-hw-ICa" kind="show" identifier="SettingsSegue" id="UUE-j3-mUt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exu-t2-kkK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -362,31 +370,31 @@
                                 <color key="textColor" red="0.43137254901960786" green="0.51372549019607838" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONECTED" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3s-ZA-xD2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3s-ZA-xD2">
                                 <rect key="frame" x="109" y="128" width="475" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSTRUCTIONS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-91-EcX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="INSTRUCTIONS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-91-EcX">
                                 <rect key="frame" x="461" y="169" width="123" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE HOST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnw-GV-oqW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SAVE HOST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnw-GV-oqW">
                                 <rect key="frame" x="16" y="198" width="92" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOAD HOST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yG-Fv-ktA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LOAD HOST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yG-Fv-ktA">
                                 <rect key="frame" x="489" y="198" width="95" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUTO-CONNECT:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-mq-hFH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="AUTO-CONNECT:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-mq-hFH">
                                 <rect key="frame" x="16" y="230" width="140" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="E8Q-hr-kWD"/>
@@ -401,7 +409,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiS-NW-idw">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OiS-NW-idw">
                                 <rect key="frame" x="0.0" y="153" width="600" height="10"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFJ-NA-6bn">
@@ -430,7 +438,7 @@
                                     <constraint firstItem="Bmb-ou-1yV" firstAttribute="leading" secondItem="OiS-NW-idw" secondAttribute="leading" id="xx8-VS-1KI"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCONNECT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GA-MQ-khA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DISCONNECT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GA-MQ-khA">
                                 <rect key="frame" x="16" y="171" width="107" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -442,26 +450,26 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ON" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgr-9M-jEU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ON" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgr-9M-jEU">
                                 <rect key="frame" x="558" y="230" width="25" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-XV-b4n">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-XV-b4n">
                                 <rect key="frame" x="17" y="250" width="566" height="1"/>
                                 <color key="backgroundColor" red="0.16862745098039217" green="0.28235294117647058" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="aY8-Je-MPP"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="200.200.200.240" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u0R-NA-Ca4">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u0R-NA-Ca4">
                                 <rect key="frame" x="73" y="72" width="511" height="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" keyboardAppearance="alert" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2222" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E1g-AD-fWB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E1g-AD-fWB">
                                 <rect key="frame" x="79" y="99" width="505" height="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>

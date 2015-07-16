@@ -45,7 +45,7 @@ typedef enum{
 
 @property (nonatomic, strong) GCDAsyncSocket *clientSocket;
 @property BOOL connected;
--(BOOL)connectToHost:(NSString *)host port:(NSInteger)port;
+-(void)connectToHost:(NSString *)host port:(NSInteger)port;
 -(void)disconnect;
 
 -(void)sendMoveUpMessages:(NSUInteger)count;

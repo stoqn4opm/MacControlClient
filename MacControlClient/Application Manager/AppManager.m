@@ -47,17 +47,30 @@
 
 
 #pragma mark - Connecting/Disconnecting to Host
--(BOOL)connectToHost:(NSString *)host port:(NSInteger)port{
+-(void)connectToHost:(NSString *)host port:(NSInteger)port{
     
     if (![host matchesRegEx:IP_REGEX]) {
         [self showAlertWithType:MCALERT_TYPE_INVALID_IP_ENTERED];
-        return NO;
+        return;
     }
     if (port < 1 || port > 65535) {
         [self showAlertWithType:MCALERT_TYPE_INVALID_PORT_ENTERED];
-        return NO;
+        return;
     }
-    return [self.clientSocket connectToHost:host onPort:port error:nil];
+//    [self.clientSocket connectToHost:host onPort:port error:nil];
+    [self.clientSocket connectToHost:host onPort:port withTimeout:3 error:nil];
+    for (int i = 0; i < 30; i++) {
+        [[AppManager sharedManager] sendMoveRightMessages:SENSITIVITY];
+    }
+    for (int i = 0; i < 30; i++) {
+        [[AppManager sharedManager] sendMoveUpMessages:SENSITIVITY];
+    }
+    for (int i = 0; i < 30; i++) {
+        [[AppManager sharedManager] sendMoveLeftMessages:SENSITIVITY];
+    }
+    for (int i = 0; i < 30; i++) {
+        [[AppManager sharedManager] sendMoveDownMessages:SENSITIVITY];
+    }
 }
 
 -(void)disconnect{
@@ -94,18 +107,33 @@
     UIAlertView *alert;
     switch (aType) {
         case MCALERT_TYPE_INVALID_IP_ENTERED:
-            alert = [[UIAlertView alloc] initWithTitle:@"HOST Error" message:@"You have entered an invalid host name or IP address" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            alert = [[UIAlertView alloc] initWithTitle:@"HOST Error" message:@"You have entered an invalid host name or IP address" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             break;
         case MCALERT_TYPE_INVALID_PORT_ENTERED:
-            alert = [[UIAlertView alloc] initWithTitle:@"PORT Error" message:@"You have entered an invalid port number. It has to match the port set on server. Valid port number is a number between 1 and 65 535." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            alert = [[UIAlertView alloc] initWithTitle:@"PORT Error" message:@"You have entered an invalid port number. It has to match the port set on server. Valid port number is a number between 1 and 65 535." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             break;
         case MCALERT_TYPE_CANNOT_CONNECT_TO_HOST:
-            alert = [[UIAlertView alloc] initWithTitle:@"Connection Error" message:@"Host is unreachable or desktop app is not running or selected port is busy. Try with other port." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            alert = [[UIAlertView alloc] initWithTitle:@"Connection Error" message:@"Host is unreachable or desktop app is not running or selected port is busy. Try with other port." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             break;
             
         default:
             break;
     }
     [alert show];
+}
+
+
+#pragma mark - <GCDAsyncSocketDelegate> Methods
+-(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+    
+    NSString *portNumber = [NSString stringWithFormat:@"%d",port];
+    NSDictionary *notifInfo = @{
+        @"Host":host,
+        @"Port":portNumber
+    };
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Connected" object:self userInfo:notifInfo];
+}
+-(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Disconnected" object:self];
 }
 @end

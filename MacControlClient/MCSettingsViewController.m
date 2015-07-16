@@ -46,6 +46,23 @@
     [self setupUserInteraction];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    if ([[[AppManager sharedManager]clientSocket]isConnected]) {
+        [self goIntoConnectedState];
+    }else{
+        [self goIntoDisconnectedState];
+    }
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(goIntoConnectedState:) name:@"Connected" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(goIntoDisconnectedState) name:@"Disconnected" object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 #pragma mark - UI Prep methods
 
 
@@ -274,71 +291,64 @@
     [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
         [self.btnConnection setAlpha:1];
     }completion:^(BOOL finished) {
-        if ([self.btnConnection.text isEqualToString:@"CONNECT"]) {
+        
+        if ([[[AppManager sharedManager]clientSocket] isConnected]) {
+            [[AppManager sharedManager] disconnect];
+        }else{
+            [[AppManager sharedManager] connectToHost:self.txtHost.text port:self.txtPort.text.integerValue];
             [self.lblStatus setTextColor:[UIColor yellowColor]];
             [self.lblStatus setText:@"CONNECTING..."];
-            if ([[AppManager sharedManager] connectToHost:self.txtHost.text port:self.txtPort.text.integerValue]){
-                [self.lblStatus setTextColor:[UIColor greenColor]];
-                [self.lblStatus setText:@"CONNECTED"];
-                [self.btnConnection setText:@"DISCONNECT"];
-                [[AppManager sharedManager] setConnected:YES];
-                for (int i = 0; i < 30; i++) {
-                    [[AppManager sharedManager] sendMoveRightMessages:SENSITIVITY];
-                }
-                for (int i = 0; i < 30; i++) {
-                    [[AppManager sharedManager] sendMoveUpMessages:SENSITIVITY];
-                }
-                for (int i = 0; i < 30; i++) {
-                    [[AppManager sharedManager] sendMoveLeftMessages:SENSITIVITY];
-                }
-                for (int i = 0; i < 30; i++) {
-                    [[AppManager sharedManager] sendMoveDownMessages:SENSITIVITY];
-                }
-            }else{
-                
-                BOOL alertShownFlag = FALSE;
-                if (![self.txtHost.text  matchesRegEx:IP_REGEX]) {
-                    [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_IP_ENTERED];
-                    alertShownFlag = TRUE;
-                }
-                if (!(self.txtPort.text.integerValue > 0 && self.txtPort.text.integerValue < 65536)) {
-                    [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_PORT_ENTERED];
-                    alertShownFlag = TRUE;
-                }
-                
-                if (!alertShownFlag) {
-                    [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_CANNOT_CONNECT_TO_HOST];
-                }
-                [self.lblStatus setTextColor:[UIColor redColor]];
-                [self.lblStatus setText:@"NOT CONNECTED"];
-            }
-        }else if ([self.btnConnection.text isEqualToString:@"DISCONNECT"]){
-            [[AppManager sharedManager] disconnect];
-            [self.lblStatus setTextColor:[UIColor redColor]];
-            [self.lblStatus setText:@"NOT CONNECTED"];
-            [self.btnConnection setText:@"CONNECT"];
-            [[AppManager sharedManager] setConnected:NO];
         }
     }];
 }
--(void)goIntoConnectedState{
-    [self.lblStatus setTextColor:[UIColor greenColor]];
-    [self.lblStatus setText:@"CONNECTED"];
-    [self.btnConnection setText:@"DISCONNECT"];
-    [self.txtHost setUserInteractionEnabled:NO];
-    [self.txtHost setTextColor:[UIColor grayColor]];
-    [self.txtPort setUserInteractionEnabled:NO];
-    [self.txtPort setTextColor:[UIColor grayColor]];
+
+-(void)goIntoConnectedState:(NSNotification *)notification {
+    
+    NSDictionary *notifInfo = notification.userInfo;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.lblStatus setTextColor:[UIColor greenColor]];
+        [self.lblStatus setText:@"CONNECTED"];
+        [self.btnConnection setText:@"DISCONNECT"];
+        [self.txtHost setUserInteractionEnabled:NO];
+        [self.txtHost setText:[notifInfo valueForKey:@"Host"]];
+        [self.txtHost setTextColor:[UIColor grayColor]];
+        [self.txtPort setUserInteractionEnabled:NO];
+        [self.txtPort setText:[notifInfo valueForKey:@"Port"]];
+        [self.txtPort setTextColor:[UIColor grayColor]];
+    });
+}
+
+-(void)goIntoConnectedState {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.lblStatus setTextColor:[UIColor greenColor]];
+        [self.lblStatus setText:@"CONNECTED"];
+        [self.btnConnection setText:@"DISCONNECT"];
+        [self.txtHost setUserInteractionEnabled:NO];
+        [self.txtHost setText:[[[AppManager sharedManager] clientSocket]connectedHost]];
+        [self.txtHost setTextColor:[UIColor grayColor]];
+        [self.txtPort setUserInteractionEnabled:NO];
+        [self.txtPort setText:[NSString stringWithFormat:@"%d",[[[AppManager sharedManager] clientSocket]connectedPort]]];
+        [self.txtPort setTextColor:[UIColor grayColor]];
+    });
 }
 
 -(void)goIntoDisconnectedState{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
     [self.lblStatus setTextColor:[UIColor redColor]];
     [self.lblStatus setText:@"NOT CONNECTED"];
     [self.btnConnection setText:@"CONNECT"];
     [self.txtHost setUserInteractionEnabled:YES];
     [self.txtHost setTextColor:[UIColor whiteColor]];
+
     [self.txtPort setUserInteractionEnabled:YES];
     [self.txtPort setTextColor:[UIColor whiteColor]];
+
+    });
 }
 #pragma mark - <UITextFieldDelegate> Methods
 - (BOOL)textField:(UITextField *)textField
