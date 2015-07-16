@@ -28,6 +28,8 @@
 #define RELEASE_LEFT_MESSAGE    @"click:left=0\x0D\x0A"
 #define HOLD_RIGHT_MESSAGE      @"click:right=1\x0D\x0A"
 #define RELEASE_RIGHT_MESSAGE   @"click:right=0\x0D\x0A"
+// Keyboard messages are in form: aaa\x0D\x0A where aaa  - UTF8 char code
+
 
 // Alert types used in showAlertWithType:
 typedef enum{
@@ -53,7 +55,7 @@ typedef enum{
 -(void)sendMoveLeftMessages:(NSUInteger)count;
 -(void)sendMoveRightMessages:(NSUInteger)count;
 
--(void)sendKeyTyped:(char)key;
+-(void)sendKeyTyped:(uint16_t)key;
 -(void)sendCloseWindowMessage;
 -(void)sendMinimizeWindowMessage;
 -(void)sendFullscreenWindowMessage;

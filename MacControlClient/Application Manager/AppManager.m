@@ -102,6 +102,14 @@
     }
 }
 
+-(void)sendKeyTyped:(uint16_t)key{
+    
+    NSString *msg = [NSString stringWithFormat:@"%d\x0D\x0A",key];
+    [self.clientSocket writeData:[msg dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
+}
+
+
+#pragma mark - Alerts
 -(void)showAlertWithType:(MCAlertType)aType{
    
     UIAlertView *alert;

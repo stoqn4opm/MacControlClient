@@ -7,7 +7,6 @@
 //
 
 #import "MCSettingsViewController.h"
-#import "MCIconTapHandler.h"
 #import "AppManager.h"
 #import "NSString+MCRegExp.h"
 
@@ -63,9 +62,9 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
 #pragma mark - UI Prep methods
-
-
 -(void)setupUserInteraction{
     [self setupAutoConnectButton];
     [self setupCloseButton];
@@ -116,7 +115,7 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullscreenWindowTappedAction)];
     [fullscreenTapped setNumberOfTapsRequired:1];
     [fullscreenTapped setNumberOfTouchesRequired:1];
-    [self.btnRightClick addGestureRecognizer:fullscreenTapped];
+    [self.btnFullScreen addGestureRecognizer:fullscreenTapped];
 }
 
 -(void)setupMinimizeButton{
@@ -142,7 +141,7 @@
     _kbInvoker.delegate = self;
     [_kbInvoker setKeyboardAppearance:UIKeyboardAppearanceDark];
     [self.view addSubview:_kbInvoker];
-    
+    [_kbInvoker setText:@"dsas	"];
     [self.btnKeyboard setUserInteractionEnabled:YES];
     UITapGestureRecognizer *keyboardInvoke =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardTappedAction)];
@@ -186,6 +185,58 @@
     [loseFocusRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:loseFocusRecognizer];
 }
+
+#pragma mark States change Helpers
+-(void)goIntoConnectedState:(NSNotification *)notification {
+    
+    NSDictionary *notifInfo = notification.userInfo;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.lblStatus setTextColor:[UIColor greenColor]];
+        [self.lblStatus setText:@"CONNECTED"];
+        [self.btnConnection setText:@"DISCONNECT"];
+        [self.txtHost setUserInteractionEnabled:NO];
+        [self.txtHost setText:[notifInfo valueForKey:@"Host"]];
+        [self.txtHost setTextColor:[UIColor grayColor]];
+        [self.txtPort setUserInteractionEnabled:NO];
+        [self.txtPort setText:[notifInfo valueForKey:@"Port"]];
+        [self.txtPort setTextColor:[UIColor grayColor]];
+    });
+}
+
+-(void)goIntoConnectedState {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.lblStatus setTextColor:[UIColor greenColor]];
+        [self.lblStatus setText:@"CONNECTED"];
+        [self.btnConnection setText:@"DISCONNECT"];
+        [self.txtHost setUserInteractionEnabled:NO];
+        [self.txtHost setText:[[[AppManager sharedManager] clientSocket]connectedHost]];
+        [self.txtHost setTextColor:[UIColor grayColor]];
+        [self.txtPort setUserInteractionEnabled:NO];
+        [self.txtPort setText:[NSString stringWithFormat:@"%d",[[[AppManager sharedManager] clientSocket]connectedPort]]];
+        [self.txtPort setTextColor:[UIColor grayColor]];
+    });
+}
+
+-(void)goIntoDisconnectedState{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.lblStatus setTextColor:[UIColor redColor]];
+        [self.lblStatus setText:@"NOT CONNECTED"];
+        [self.btnConnection setText:@"CONNECT"];
+        [self.txtHost setUserInteractionEnabled:YES];
+        [self.txtHost setTextColor:[UIColor whiteColor]];
+        
+        [self.txtPort setUserInteractionEnabled:YES];
+        [self.txtPort setTextColor:[UIColor whiteColor]];
+        
+    });
+}
+
+
 #pragma mark - User Interactions
 -(void)settingsTappedAction{
     [self.btnSettings setAlpha:0];
@@ -302,60 +353,23 @@
     }];
 }
 
--(void)goIntoConnectedState:(NSNotification *)notification {
-    
-    NSDictionary *notifInfo = notification.userInfo;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [self.lblStatus setTextColor:[UIColor greenColor]];
-        [self.lblStatus setText:@"CONNECTED"];
-        [self.btnConnection setText:@"DISCONNECT"];
-        [self.txtHost setUserInteractionEnabled:NO];
-        [self.txtHost setText:[notifInfo valueForKey:@"Host"]];
-        [self.txtHost setTextColor:[UIColor grayColor]];
-        [self.txtPort setUserInteractionEnabled:NO];
-        [self.txtPort setText:[notifInfo valueForKey:@"Port"]];
-        [self.txtPort setTextColor:[UIColor grayColor]];
-    });
-}
 
--(void)goIntoConnectedState {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [self.lblStatus setTextColor:[UIColor greenColor]];
-        [self.lblStatus setText:@"CONNECTED"];
-        [self.btnConnection setText:@"DISCONNECT"];
-        [self.txtHost setUserInteractionEnabled:NO];
-        [self.txtHost setText:[[[AppManager sharedManager] clientSocket]connectedHost]];
-        [self.txtHost setTextColor:[UIColor grayColor]];
-        [self.txtPort setUserInteractionEnabled:NO];
-        [self.txtPort setText:[NSString stringWithFormat:@"%d",[[[AppManager sharedManager] clientSocket]connectedPort]]];
-        [self.txtPort setTextColor:[UIColor grayColor]];
-    });
-}
-
--(void)goIntoDisconnectedState{
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-    [self.lblStatus setTextColor:[UIColor redColor]];
-    [self.lblStatus setText:@"NOT CONNECTED"];
-    [self.btnConnection setText:@"CONNECT"];
-    [self.txtHost setUserInteractionEnabled:YES];
-    [self.txtHost setTextColor:[UIColor whiteColor]];
-
-    [self.txtPort setUserInteractionEnabled:YES];
-    [self.txtPort setTextColor:[UIColor whiteColor]];
-
-    });
-}
 #pragma mark - <UITextFieldDelegate> Methods
 - (BOOL)textField:(UITextField *)textField
 shouldChangeCharactersInRange:(NSRange)range
 replacementString:(NSString *)string{
     if (textField == _kbInvoker) {
+        if (string.length > 0) {
         [[AppManager sharedManager] sendKeyTyped:[string characterAtIndex:0]];
+        }
+        else{
+            // perform stupid hack in order to be able to send clear when _kbInvoker text is empty
+            // it will be fixed when i make my own custom keyboard which will directly send CGKeyCodes
+            [textField setText:@"hack"];
+            
+            // 8 is ASCII key code for backspace
+            [[AppManager sharedManager]sendKeyTyped:8];
+        }
     }
     return YES;
 }
@@ -381,7 +395,11 @@ replacementString:(NSString *)string{
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
-    if (textField == self.txtHost || textField == self.txtPort) {
+    if (textField == _kbInvoker) {
+        // 13 is ASCII keycode for Carridge return
+        [[AppManager sharedManager] sendKeyTyped:13];
+    }
+    else{
         [textField resignFirstResponder];
     }
     return YES;

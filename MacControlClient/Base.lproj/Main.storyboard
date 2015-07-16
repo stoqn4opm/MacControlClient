@@ -189,12 +189,16 @@
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnCloseWindow" destination="O3x-hr-u8o" id="Ico-RI-zAk"/>
-                        <outlet property="btnFullScreenWindow" destination="yCS-zC-Im7" id="03T-o7-LJe"/>
-                        <outlet property="btnKeyboard" destination="a2C-gn-lbD" id="hDN-95-lop"/>
-                        <outlet property="btnMinimizeWindow" destination="OlY-h5-7HW" id="LFN-fJ-JhY"/>
+                        <outlet property="btnClose" destination="O3x-hr-u8o" id="jvT-2T-5az"/>
+                        <outlet property="btnFullScreen" destination="yCS-zC-Im7" id="dsc-Gi-sHU"/>
+                        <outlet property="btnKeyboard" destination="a2C-gn-lbD" id="dbM-x3-wbA"/>
+                        <outlet property="btnLeftClick" destination="XMI-au-oYx" id="bHk-Hf-PVo"/>
+                        <outlet property="btnMinimize" destination="OlY-h5-7HW" id="u46-47-tSY"/>
+                        <outlet property="btnRightClick" destination="qgJ-pp-s8u" id="Hv9-OB-4i5"/>
                         <outlet property="btnSettings" destination="mzX-3P-MJV" id="33C-wG-CuT"/>
-                        <outlet property="swipeField" destination="efa-dM-7av" id="KDJ-kW-zBE"/>
+                        <outlet property="lblLeftClick" destination="2bn-dJ-lkx" id="4uu-Lw-4s3"/>
+                        <outlet property="lblRightClick" destination="gdp-vN-c8K" id="n4i-vR-PfH"/>
+                        <outlet property="swipeField" destination="efa-dM-7av" id="C8f-0J-M9m"/>
                         <segue destination="L7N-hw-ICa" kind="show" identifier="SettingsSegue" id="UUE-j3-mUt"/>
                     </connections>
                 </viewController>
@@ -370,32 +374,32 @@
                                 <color key="textColor" red="0.43137254901960786" green="0.51372549019607838" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3s-ZA-xD2">
-                                <rect key="frame" x="109" y="128" width="475" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3s-ZA-xD2">
+                                <rect key="frame" x="109" y="128" width="475" height="0.0"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="INSTRUCTIONS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-91-EcX">
-                                <rect key="frame" x="461" y="169" width="123" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSTRUCTIONS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNV-91-EcX">
+                                <rect key="frame" x="461" y="150" width="123" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SAVE HOST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnw-GV-oqW">
-                                <rect key="frame" x="16" y="198" width="92" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE HOST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnw-GV-oqW">
+                                <rect key="frame" x="16" y="179" width="92" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LOAD HOST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yG-Fv-ktA">
-                                <rect key="frame" x="489" y="198" width="95" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOAD HOST" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yG-Fv-ktA">
+                                <rect key="frame" x="489" y="179" width="95" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="AUTO-CONNECT:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-mq-hFH">
-                                <rect key="frame" x="16" y="230" width="140" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUTO-CONNECT:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79d-mq-hFH">
+                                <rect key="frame" x="16" y="211" width="140" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="E8Q-hr-kWD"/>
                                 </constraints>
@@ -409,8 +413,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OiS-NW-idw">
-                                <rect key="frame" x="0.0" y="153" width="600" height="10"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiS-NW-idw">
+                                <rect key="frame" x="0.0" y="134" width="600" height="10"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFJ-NA-6bn">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
@@ -438,8 +442,8 @@
                                     <constraint firstItem="Bmb-ou-1yV" firstAttribute="leading" secondItem="OiS-NW-idw" secondAttribute="leading" id="xx8-VS-1KI"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DISCONNECT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GA-MQ-khA">
-                                <rect key="frame" x="16" y="171" width="107" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCONNECT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GA-MQ-khA">
+                                <rect key="frame" x="16" y="152" width="107" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -450,14 +454,14 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ON" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgr-9M-jEU">
-                                <rect key="frame" x="558" y="230" width="25" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ON" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgr-9M-jEU">
+                                <rect key="frame" x="558" y="211" width="25" height="19"/>
                                 <fontDescription key="fontDescription" name="EurostileRegular" family="Eurostile" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-XV-b4n">
-                                <rect key="frame" x="17" y="250" width="566" height="1"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-XV-b4n">
+                                <rect key="frame" x="17" y="231" width="566" height="1"/>
                                 <color key="backgroundColor" red="0.16862745098039217" green="0.28235294117647058" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="aY8-Je-MPP"/>

@@ -8,17 +8,21 @@
 
 #import "MCMainViewController.h"
 #import "AppManager.h"
-#import "MCIconTapHandler.h"
 
-@interface MCMainViewController () <UIGestureRecognizerDelegate, MCIconTapHandlerDelegate>
-
-@property (strong, nonatomic) UIView *swipeField;
-@property (weak, nonatomic) IBOutlet UIImageView *btnCloseWindow;
-@property (weak, nonatomic) IBOutlet UIImageView *btnMinimizeWindow;
-@property (weak, nonatomic) IBOutlet UIImageView *btnFullScreenWindow;
+@interface MCMainViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate>{
+    UITextField *_kbInvoker;
+}
+@property (weak, nonatomic) IBOutlet UIView *btnLeftClick;
+@property (weak, nonatomic) IBOutlet UIView *btnRightClick;
+@property (weak, nonatomic) IBOutlet UILabel *lblLeftClick;
+@property (weak, nonatomic) IBOutlet UILabel *lblRightClick;
+@property (weak, nonatomic) IBOutlet UIImageView *btnFullScreen;
+@property (weak, nonatomic) IBOutlet UIImageView *btnMinimize;
+@property (weak, nonatomic) IBOutlet UIImageView *btnClose;
 @property (weak, nonatomic) IBOutlet UIImageView *btnKeyboard;
 @property (weak, nonatomic) IBOutlet UIImageView *btnSettings;
-@property (strong , nonatomic) MCIconTapHandler  *tapHandler;
+
+@property (weak, nonatomic) IBOutlet UIImageView *swipeField;
 @end
 
 @implementation MCMainViewController
@@ -26,73 +30,186 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self _prepareUI];
-    [self.view setUserInteractionEnabled:YES];
-    self.swipeField = self.view;
+    [self prepareUI];
     UIGestureRecognizer *mouseGestureRecognizer = [UIGestureRecognizer new];
     mouseGestureRecognizer.delegate = self;
     [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
 }
 
--(void)_prepareUI{
-    
-    [self.btnSettings           setUserInteractionEnabled:YES];
-    [self.btnMinimizeWindow     setUserInteractionEnabled:YES];
-    [self.btnKeyboard           setUserInteractionEnabled:YES];
-    [self.btnFullScreenWindow   setUserInteractionEnabled:YES];
-    [self.btnCloseWindow        setUserInteractionEnabled:YES];
-    
-    [self _setupToolbarIcons];
-    
-    
+-(void)prepareUI{
+    [self setupUserInteraction];
 }
 
--(void)_setupToolbarIcons{
+
+#pragma mark - UI Prep methods
+-(void)setupUserInteraction{
+
+    [self setupCloseButton];
+    [self setupFullScreenButton];
+    [self setupLeftClickButton];
+    [self setupMinimizeButton];
+    [self setupRightClickButton];
+    [self setupSetingsButton];
+    [self setupKeyboardButton];
+    [self setupKeboardResignOnLostFocus];
+}
+
+// Mouse clicks ************************************************************************************
+-(void)setupLeftClickButton{
+    [self.btnLeftClick setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *leftClickTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftClickTappedAction)];
+    [leftClickTapped setNumberOfTapsRequired:1];
+    [leftClickTapped setNumberOfTouchesRequired:1];
+    [self.btnLeftClick addGestureRecognizer:leftClickTapped];
+}
+
+-(void)setupRightClickButton{
+    [self.btnRightClick setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *leftClickTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightClickTappedAction)];
+    [leftClickTapped setNumberOfTapsRequired:1];
+    [leftClickTapped setNumberOfTouchesRequired:1];
+    [self.btnRightClick addGestureRecognizer:leftClickTapped];
+}
+// End Mouse clicks ********************************************************************************
+
+// Toolbar Clicks **********************************************************************************
+-(void) setupSetingsButton{
+    [self.btnSettings setUserInteractionEnabled:YES];
     UITapGestureRecognizer *settingsTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(settingsTapped)];
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(settingsTappedAction)];
     [settingsTapped setNumberOfTapsRequired:1];
     [settingsTapped setNumberOfTouchesRequired:1];
     [self.btnSettings addGestureRecognizer:settingsTapped];
-    
-    UITapGestureRecognizer *closeWindowTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(closeWindowTapped)];
-    [settingsTapped setNumberOfTapsRequired:1];
-    [settingsTapped setNumberOfTouchesRequired:1];
-    [self.btnCloseWindow addGestureRecognizer:closeWindowTapped];
-    
-    UITapGestureRecognizer *minimizeWindowTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(minimizeWindowTapped)];
-    [settingsTapped setNumberOfTapsRequired:1];
-    [settingsTapped setNumberOfTouchesRequired:1];
-    [self.btnMinimizeWindow addGestureRecognizer:minimizeWindowTapped];
-    
-    UITapGestureRecognizer *fullscreenWindowTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(fullscreenWindowTapped)];
-    [settingsTapped setNumberOfTapsRequired:1];
-    [settingsTapped setNumberOfTouchesRequired:1];
-    [self.btnFullScreenWindow addGestureRecognizer:fullscreenWindowTapped];
-    
-    UITapGestureRecognizer *keyboardTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self.tapHandler action:@selector(keyboardTapped)];
-    [settingsTapped setNumberOfTapsRequired:1];
-    [settingsTapped setNumberOfTouchesRequired:1];
-    [self.btnKeyboard addGestureRecognizer:keyboardTapped];
 }
 
--(MCIconTapHandler *)tapHandler{
-    if (_tapHandler) {
-        return _tapHandler;
-    }
-    _tapHandler = [MCIconTapHandler new];
-    _tapHandler.delegate = self;
-    return _tapHandler;
+-(void)setupFullScreenButton{
+    [self.btnFullScreen setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *fullscreenTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullscreenWindowTappedAction)];
+    [fullscreenTapped setNumberOfTapsRequired:1];
+    [fullscreenTapped setNumberOfTouchesRequired:1];
+    [self.btnFullScreen addGestureRecognizer:fullscreenTapped];
 }
+
+-(void)setupMinimizeButton{
+    [self.btnMinimize setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *minimizeTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(minimizeWindowTappedAction)];
+    [minimizeTapped setNumberOfTapsRequired:1];
+    [minimizeTapped setNumberOfTouchesRequired:1];
+    [self.btnMinimize addGestureRecognizer:minimizeTapped];
+}
+
+-(void)setupCloseButton{
+    [self.btnClose setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *closeTapped =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeWindowTappedAction)];
+    [closeTapped setNumberOfTapsRequired:1];
+    [closeTapped setNumberOfTouchesRequired:1];
+    [self.btnClose addGestureRecognizer:closeTapped];
+}
+
+-(void)setupKeyboardButton{
+    _kbInvoker = [UITextField new];
+    _kbInvoker.delegate = self;
+    [_kbInvoker setKeyboardAppearance:UIKeyboardAppearanceDark];
+    [self.view addSubview:_kbInvoker];
+    
+    [self.btnKeyboard setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *keyboardInvoke =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardTappedAction)];
+    [keyboardInvoke setNumberOfTapsRequired:1];
+    [keyboardInvoke setNumberOfTouchesRequired:1];
+    [self.btnKeyboard addGestureRecognizer:keyboardInvoke];
+}
+// End Toolbar Clicks ******************************************************************************
+
+-(void)setupKeboardResignOnLostFocus{
+    [self.view setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *loseFocusRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:_kbInvoker action:@selector(resignFirstResponder)];
+    [loseFocusRecognizer setNumberOfTapsRequired:1];
+    [loseFocusRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:loseFocusRecognizer];
+}
+
+
+#pragma mark - User Interactions
+-(void)settingsTappedAction{
+    [self.btnSettings setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.btnSettings setAlpha:1];
+    } completion:^(BOOL finished) {
+        [self performSegueWithIdentifier:@"SettingsSegue" sender:nil];
+    }];
+}
+
+-(void)leftClickTappedAction{
+    [self.lblLeftClick setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.lblLeftClick setAlpha:1];
+    }completion:^(BOOL finished) {
+        [[AppManager sharedManager] sendLeftClickMessage];
+    }];
+}
+
+-(void)rightClickTappedAction{
+    [self.lblRightClick setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.lblRightClick setAlpha:1];
+    }completion:^(BOOL finished) {
+        [[AppManager sharedManager] sendRightClickMessage];
+    }];
+}
+
+-(void)fullscreenWindowTappedAction{
+    [self.btnFullScreen setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.btnFullScreen setAlpha:1];
+    }completion:^(BOOL finished) {
+        [[AppManager sharedManager] sendFullscreenWindowMessage];
+    }];
+}
+
+-(void)minimizeWindowTappedAction{
+    [self.btnMinimize setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.btnMinimize setAlpha:1];
+    }completion:^(BOOL finished) {
+        [[AppManager sharedManager] sendMinimizeWindowMessage];
+    }];
+}
+
+-(void)closeWindowTappedAction{
+    [self.btnClose setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.btnClose setAlpha:1];
+    }completion:^(BOOL finished) {
+        [[AppManager sharedManager] sendCloseWindowMessage];
+    }];
+}
+
+-(void)keyboardTappedAction{
+    [self.btnKeyboard setAlpha:0];
+    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+        [self.btnKeyboard setAlpha:1];
+    }completion:^(BOOL finished) {
+        if ([_kbInvoker isFirstResponder]) {
+            [_kbInvoker resignFirstResponder];
+        }else{
+            [_kbInvoker becomeFirstResponder];
+        }
+    }];
+}
+
 
 #pragma mark - Touch Handling
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     
-    CGPoint previousLocation = [self _calculateMeanPreviousLocationFromTouches:touches];
-    CGPoint currentLocation  = [self _calculateMeanLocationFromTouches:touches];
+    CGPoint previousLocation = [self calculateMeanPreviousLocationFromTouches:touches];
+    CGPoint currentLocation  = [self calculateMeanLocationFromTouches:touches];
     
     if (currentLocation.x > previousLocation.x) {
         // move x of the cursor one unit forward
@@ -112,8 +229,21 @@
 }
 
 
+#pragma mark - <UITextFieldDelegate> Methods
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string{
+    if (string.length > 0) {
+        [[AppManager sharedManager] sendKeyTyped:[string characterAtIndex:0]];
+        
+    }else{
+        [[AppManager sharedManager] sendKeyTyped:8];
+    }
+    return YES;
+}
+
 #pragma mark - Touch Handling Helper functions
--(CGPoint) _calculateMeanPreviousLocationFromTouches:(NSSet *)touches{
+-(CGPoint) calculateMeanPreviousLocationFromTouches:(NSSet *)touches{
     CGFloat __block prevX = 0;
     CGFloat __block prevY = 0;
     [touches enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
@@ -125,7 +255,7 @@
     return CGPointMake(prevX, prevY);
 }
 
--(CGPoint) _calculateMeanLocationFromTouches:(NSSet *)touches{
+-(CGPoint) calculateMeanLocationFromTouches:(NSSet *)touches{
     CGFloat __block x = 0;
     CGFloat __block y = 0;
     [touches enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
@@ -135,11 +265,5 @@
     x /= touches.count;
     y /= touches.count;
     return CGPointMake(x, y);
-}
-
-
-#pragma mark - <MCIconTapHandlerDelegate> Methods
--(void)presentSettings{
-    [self performSegueWithIdentifier:@"SettingsSegue" sender:nil];
 }
 @end
