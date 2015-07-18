@@ -109,10 +109,28 @@
         [self.btnSettings setAlpha:1];
     }];
     if ([self.parentViewController isKindOfClass:[MCMainViewController class]]) {
-        [self.parentViewController performSegueWithIdentifier:@"SettingsSegue" sender:nil];
+        MCMainViewController *parent = (MCMainViewController *)self.parentViewController;
         
-    }else if ([self.parentViewController isKindOfClass:[MCSettingsViewController class]]){
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (parent.settingsContainer.hidden) {
+            [parent.settingsContainer setAlpha:0];
+            [parent.settingsTop setConstant:8];
+            [parent.settingsContainer setHidden:NO];
+            [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+                
+                [parent.settingsContainer setAlpha:1.0f];
+                [parent.view layoutIfNeeded];
+            }];
+        }else {
+            [parent.settingsTop setConstant:100];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ResignKB" object:self];
+            [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
+            
+                [parent.settingsContainer setAlpha:0];
+                [parent.view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                [parent.settingsContainer setHidden:YES];
+            }];
+        }
     }
 }
 

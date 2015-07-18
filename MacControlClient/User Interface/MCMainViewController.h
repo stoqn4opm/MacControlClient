@@ -10,4 +10,6 @@
 
 @interface MCMainViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *settingsTop;
+@property (weak, nonatomic) IBOutlet UIView *settingsContainer;
 @end

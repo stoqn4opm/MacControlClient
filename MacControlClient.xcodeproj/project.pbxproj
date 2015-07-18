@@ -15,6 +15,7 @@
 		5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0D1B54322B009D4EDA /* AppManager.m */; };
 		5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */; };
 		5EAB1E081B5AA01800422C63 /* MCToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */; };
+		5EAB1E0C1B5AAD9E00422C63 /* MCMouseClicksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1E0B1B5AAD9E00422C63 /* MCMouseClicksViewController.m */; };
 		90BDED041B4D519F00A281DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED031B4D519F00A281DF /* main.m */; };
 		90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED061B4D519F00A281DF /* AppDelegate.m */; };
 		90BDED0D1B4D519F00A281DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED0B1B4D519F00A281DF /* Main.storyboard */; };
@@ -48,6 +49,8 @@
 		5E7C8A101B543261009D4EDA /* MCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMainViewController.h; path = "User Interface/MCMainViewController.h"; sourceTree = "<group>"; };
 		5EAB1E061B5AA01800422C63 /* MCToolbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCToolbarViewController.h; path = "User Interface/MCToolbar/MCToolbarViewController.h"; sourceTree = "<group>"; };
 		5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCToolbarViewController.m; path = "User Interface/MCToolbar/MCToolbarViewController.m"; sourceTree = "<group>"; };
+		5EAB1E0A1B5AAD9E00422C63 /* MCMouseClicksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMouseClicksViewController.h; path = "User Interface/MCMouseClicks/MCMouseClicksViewController.h"; sourceTree = "<group>"; };
+		5EAB1E0B1B5AAD9E00422C63 /* MCMouseClicksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMouseClicksViewController.m; path = "User Interface/MCMouseClicks/MCMouseClicksViewController.m"; sourceTree = "<group>"; };
 		90BDECFE1B4D519F00A281DF /* MacControlClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacControlClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BDED021B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED031B4D519F00A281DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,6 +107,15 @@
 				5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */,
 			);
 			name = Toolbar;
+			sourceTree = "<group>";
+		};
+		5EAB1E0D1B5AADB400422C63 /* Mouse Clicks  */ = {
+			isa = PBXGroup;
+			children = (
+				5EAB1E0A1B5AAD9E00422C63 /* MCMouseClicksViewController.h */,
+				5EAB1E0B1B5AAD9E00422C63 /* MCMouseClicksViewController.m */,
+			);
+			name = "Mouse Clicks ";
 			sourceTree = "<group>";
 		};
 		90BDECF51B4D519F00A281DF = {
@@ -175,6 +187,7 @@
 				5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */,
 				90BDED0B1B4D519F00A281DF /* Main.storyboard */,
 				90BDED101B4D519F00A281DF /* LaunchScreen.xib */,
+				5EAB1E0D1B5AADB400422C63 /* Mouse Clicks  */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -315,6 +328,7 @@
 				90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */,
 				90BDED041B4D519F00A281DF /* main.m in Sources */,
 				5E7C8A081B5431A6009D4EDA /* NSString+MCRegExp.m in Sources */,
+				5EAB1E0C1B5AAD9E00422C63 /* MCMouseClicksViewController.m in Sources */,
 				5EAB1E081B5AA01800422C63 /* MCToolbarViewController.m in Sources */,
 				5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */,
 			);

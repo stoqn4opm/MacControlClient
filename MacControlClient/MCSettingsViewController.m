@@ -21,19 +21,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *btnLoadHost;
 @property (weak, nonatomic) IBOutlet UILabel *btnAutoConnect;
 
-
-@property (weak, nonatomic) IBOutlet UIView  *btnLeftClick;
-@property (weak, nonatomic) IBOutlet UILabel *lblLeftClick;
-@property (weak, nonatomic) IBOutlet UIView  *btnRightClick;
-@property (weak, nonatomic) IBOutlet UILabel *lblRightClick;
-
 @end
 
 @implementation MCSettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [self setupUserInteraction];
 }
 
@@ -49,6 +42,8 @@
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(goIntoDisconnectedState) name:@"Disconnected" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resignRespondersForTextInput) name:@"ResignKB" object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -59,37 +54,12 @@
 #pragma mark - UI Prep methods
 -(void)setupUserInteraction{
     [self setupAutoConnectButton];
-
-    [self setupLeftClickButton];
-
-    [self setupRightClickButton];
-
+    
     [self setupAddressInput];
     [self setupKeboardResignOnLostFocus];
     [self setupConnectButton];
 }
 
-// Mouse clicks ************************************************************************************
--(void)setupLeftClickButton{
-    [self.btnLeftClick setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *leftClickTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftClickTappedAction)];
-    [leftClickTapped setNumberOfTapsRequired:1];
-    [leftClickTapped setNumberOfTouchesRequired:1];
-    [self.btnLeftClick addGestureRecognizer:leftClickTapped];
-}
-
--(void)setupRightClickButton{
-    [self.btnRightClick setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *leftClickTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightClickTappedAction)];
-    [leftClickTapped setNumberOfTapsRequired:1];
-    [leftClickTapped setNumberOfTouchesRequired:1];
-    [self.btnRightClick addGestureRecognizer:leftClickTapped];
-}
-// End Mouse clicks ********************************************************************************
-
-// Settings Body Clicks ****************************************************************************
 -(void)setupAutoConnectButton{
     [self.btnAutoConnect setUserInteractionEnabled:YES];
     UITapGestureRecognizer *autoconnectTapped =
@@ -112,8 +82,6 @@
     [connectionTapped setNumberOfTouchesRequired:1];
     [self.btnConnection addGestureRecognizer:connectionTapped];
 }
-// End Settings Body Clicks ************************************************************************
-
 
 -(void)setupKeboardResignOnLostFocus{
     [self.view setUserInteractionEnabled:YES];
@@ -167,35 +135,20 @@
         [self.btnConnection setText:@"CONNECT"];
         [self.txtHost setUserInteractionEnabled:YES];
         [self.txtHost setTextColor:[UIColor whiteColor]];
-        
         [self.txtPort setUserInteractionEnabled:YES];
         [self.txtPort setTextColor:[UIColor whiteColor]];
-        
     });
 }
 
 
+#pragma mark -
+-(void)resignRespondersForTextInput{
+    [self.txtHost resignFirstResponder];
+    [self.txtPort resignFirstResponder];
+}
+
+
 #pragma mark - User Interactions
-
-
--(void)leftClickTappedAction{
-    [self.lblLeftClick setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.lblLeftClick setAlpha:1];
-    }completion:^(BOOL finished) {
-        [[AppManager sharedManager] sendLeftClickMessage];
-    }];
-}
-
--(void)rightClickTappedAction{
-    [self.lblRightClick setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.lblRightClick setAlpha:1];
-    }completion:^(BOOL finished) {
-        [[AppManager sharedManager] sendRightClickMessage];
-    }];
-}
-
 -(void)autoConnectTappedAction{
     [self.btnAutoConnect setAlpha:0];
     if ([self.btnAutoConnect.text isEqualToString:@"ON"]) {
@@ -208,15 +161,8 @@
     [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
         [self.btnAutoConnect setAlpha:1];
     }completion:^(BOOL finished) {
-#warning implement autoconnect logic
+        NSLog(@"Not Implemented yet.");
     }];
-}
-
-
-
--(void)resignRespondersForTextInput{
-    [self.txtHost resignFirstResponder];
-    [self.txtPort resignFirstResponder];
 }
 
 -(void)connectionTappedAction{
@@ -241,14 +187,14 @@
     if (textField == self.txtHost){
         if ([textField.text  matchesRegEx:IP_REGEX]) {
             return YES;
-        }else{
+        }else if (![textField.text isEqualToString:@""]){
             [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_IP_ENTERED];
             return YES;
         }
     }else if (textField == self.txtPort){
         if (textField.text.integerValue > 0 && textField.text.integerValue < 65536) {
             return YES;
-        }else{
+        }else if (![textField.text isEqualToString:@""]){
             [[AppManager sharedManager] showAlertWithType:MCALERT_TYPE_INVALID_PORT_ENTERED];
             return YES;
         }

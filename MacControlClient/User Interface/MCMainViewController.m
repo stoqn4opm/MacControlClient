@@ -9,14 +9,7 @@
 #import "MCMainViewController.h"
 #import "AppManager.h"
 
-@interface MCMainViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate>{
-    UITextField *_kbInvoker;
-}
-@property (weak, nonatomic) IBOutlet UIView *btnLeftClick;
-@property (weak, nonatomic) IBOutlet UIView *btnRightClick;
-@property (weak, nonatomic) IBOutlet UILabel *lblLeftClick;
-@property (weak, nonatomic) IBOutlet UILabel *lblRightClick;
-
+@interface MCMainViewController () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *swipeField;
 @end
 
@@ -24,65 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self prepareUI];
     UIGestureRecognizer *mouseGestureRecognizer = [UIGestureRecognizer new];
     mouseGestureRecognizer.delegate = self;
     [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
-}
-
--(void)prepareUI{
-    [self setupUserInteraction];
-}
-
-
-#pragma mark - UI Prep methods
--(void)setupUserInteraction{
-
-    [self setupLeftClickButton];
-
-    [self setupRightClickButton];
-
-}
-
-// Mouse clicks ************************************************************************************
--(void)setupLeftClickButton{
-    [self.btnLeftClick setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *leftClickTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftClickTappedAction)];
-    [leftClickTapped setNumberOfTapsRequired:1];
-    [leftClickTapped setNumberOfTouchesRequired:1];
-    [self.btnLeftClick addGestureRecognizer:leftClickTapped];
-}
-
--(void)setupRightClickButton{
-    [self.btnRightClick setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *leftClickTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightClickTappedAction)];
-    [leftClickTapped setNumberOfTapsRequired:1];
-    [leftClickTapped setNumberOfTouchesRequired:1];
-    [self.btnRightClick addGestureRecognizer:leftClickTapped];
-}
-// End Mouse clicks ********************************************************************************
-
-
-#pragma mark - User Interactions
--(void)leftClickTappedAction{
-    [self.lblLeftClick setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.lblLeftClick setAlpha:1];
-    }completion:^(BOOL finished) {
-        [[AppManager sharedManager] sendLeftClickMessage];
-    }];
-}
-
--(void)rightClickTappedAction{
-    [self.lblRightClick setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.lblRightClick setAlpha:1];
-    }completion:^(BOOL finished) {
-        [[AppManager sharedManager] sendRightClickMessage];
-    }];
 }
 
 #pragma mark - Touch Handling
