@@ -11,7 +11,7 @@
 #import "GCDAsyncSocket.h"
 
 // Config
-#define TIMEOUT 5
+#define TIMEOUT 50000
 #define PORT    2222
 #define IP_REGEX @"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
 #define SENSITIVITY 10
@@ -50,18 +50,20 @@ typedef enum{
 -(void)connectToHost:(NSString *)host port:(NSInteger)port;
 -(void)disconnect;
 
--(void)sendMoveUpMessages:(NSUInteger)count;
--(void)sendMoveDownMessages:(NSUInteger)count;
--(void)sendMoveLeftMessages:(NSUInteger)count;
--(void)sendMoveRightMessages:(NSUInteger)count;
+-(void)sendMoveUpMessage;
+-(void)sendMoveDownMessage;
+-(void)sendMoveLeftMessage;
+-(void)sendMoveRightMessage;
 
 -(void)sendKeyTyped:(uint16_t)key;
 -(void)sendCloseWindowMessage;
 -(void)sendMinimizeWindowMessage;
 -(void)sendFullscreenWindowMessage;
 
--(void)sendLeftClickMessage;
--(void)sendRightClickMessage;
+-(void)sendLeftDownMessage;
+-(void)sendRightDownMessage;
+-(void)sendLeftUPMessage;
+-(void)sendRightUPMessage;
 
 -(void)showAlertWithType:(MCAlertType)aType;
 @end

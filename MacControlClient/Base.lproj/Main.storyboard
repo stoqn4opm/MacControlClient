@@ -293,6 +293,8 @@
                         <outlet property="btnInstructions" destination="TNV-91-EcX" id="2ra-M9-6d1"/>
                         <outlet property="btnLoadHost" destination="6yG-Fv-ktA" id="kEL-OL-wVV"/>
                         <outlet property="btnSaveHost" destination="Qnw-GV-oqW" id="ltg-Kf-P44"/>
+                        <outlet property="lblEmail" destination="1u8-8F-b73" id="Otj-MS-w5m"/>
+                        <outlet property="lblMacControl" destination="3Mt-5W-Pnp" id="7jY-6C-hyu"/>
                         <outlet property="lblStatus" destination="A3s-ZA-xD2" id="zeb-PP-X6x"/>
                         <outlet property="txtHost" destination="u0R-NA-Ca4" id="Go1-Gk-KA2"/>
                         <outlet property="txtPort" destination="E1g-AD-fWB" id="dTC-W6-DDL"/>
@@ -305,7 +307,7 @@
         <!--Mouse Clicks-->
         <scene sceneID="tWb-dp-uqT">
             <objects>
-                <viewController title="Mouse Clicks" id="wEP-6S-Jyc" sceneMemberID="viewController">
+                <viewController title="Mouse Clicks" id="wEP-6S-Jyc" customClass="MCMouseClicksViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ueo-V5-e6h"/>
                         <viewControllerLayoutGuide type="bottom" id="ZNK-rE-P8v"/>
@@ -317,7 +319,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXt-tQ-jBb" userLabel="Mouse Clicks">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4K6-WT-7uN" userLabel="Left">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4K6-WT-7uN" userLabel="Left" customClass="MCMouseLeftClick">
                                         <rect key="frame" x="1" y="1" width="299" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEFT CLICK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUV-Q4-1AC">
@@ -333,7 +335,7 @@
                                             <constraint firstAttribute="centerX" secondItem="WUV-Q4-1AC" secondAttribute="centerX" id="LQy-m1-tX3"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JI7-zg-gv3" userLabel="Right">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JI7-zg-gv3" userLabel="Right" customClass="MCMouseRightClick">
                                         <rect key="frame" x="301" y="1" width="298" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RIGHT CLICK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbd-QS-jbi">
@@ -374,6 +376,12 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="44"/>
+                    <connections>
+                        <outlet property="leftField" destination="4K6-WT-7uN" id="5di-4v-eJ4"/>
+                        <outlet property="leftLabel" destination="WUV-Q4-1AC" id="lII-NA-3ca"/>
+                        <outlet property="rightField" destination="JI7-zg-gv3" id="CuX-p6-ltA"/>
+                        <outlet property="rightLabel" destination="wbd-QS-jbi" id="uo2-If-7at"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l6r-of-qI9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

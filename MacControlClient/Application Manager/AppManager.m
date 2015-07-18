@@ -58,18 +58,18 @@
         return;
     }
 //    [self.clientSocket connectToHost:host onPort:port error:nil];
-    [self.clientSocket connectToHost:host onPort:port withTimeout:3 error:nil];
+    [self.clientSocket connectToHost:host onPort:port withTimeout:TIMEOUT error:nil];
     for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveRightMessages:SENSITIVITY];
+        [[AppManager sharedManager] sendMoveRightMessage];
     }
     for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveUpMessages:SENSITIVITY];
+        [[AppManager sharedManager] sendMoveUpMessage];
     }
     for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveLeftMessages:SENSITIVITY];
+        [[AppManager sharedManager] sendMoveLeftMessage];
     }
     for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveDownMessages:SENSITIVITY];
+        [[AppManager sharedManager] sendMoveDownMessage];
     }
 }
 
@@ -79,27 +79,43 @@
 
 
 #pragma mark - Send Protocol Messages
--(void)sendMoveUpMessages:(NSUInteger)count{
-    for (int i = 0; i < count; i++) {
+-(void)sendMoveUpMessage{
+    for (int i = 0; i < SENSITIVITY; i++) {
         [self.clientSocket writeData:[MOVE_UP_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
     }
 }
 
--(void)sendMoveDownMessages:(NSUInteger)count{
-    for (int i = 0; i < count; i++) {
+-(void)sendMoveDownMessage{
+    for (int i = 0; i < SENSITIVITY; i++) {
         [self.clientSocket writeData:[MOVE_DOWN_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
     }
 }
 
--(void)sendMoveLeftMessages:(NSUInteger)count{
-    for (int i = 0; i < count; i++) {
+-(void)sendMoveLeftMessage{
+    for (int i = 0; i < SENSITIVITY; i++) {
         [self.clientSocket writeData:[MOVE_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
     }
 }
--(void)sendMoveRightMessages:(NSUInteger)count{
-    for (int i = 0; i < count; i++) {
+-(void)sendMoveRightMessage{
+    for (int i = 0; i < SENSITIVITY; i++) {
         [self.clientSocket writeData:[MOVE_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
     }
+}
+
+-(void)sendLeftDownMessage{
+    [self.clientSocket writeData:[HOLD_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+}
+
+-(void)sendLeftUPMessage{
+    [self.clientSocket writeData:[RELEASE_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+}
+
+-(void)sendRightDownMessage{
+    [self.clientSocket writeData:[HOLD_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+}
+
+-(void)sendRightUPMessage{
+    [self.clientSocket writeData:[RELEASE_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
 }
 
 -(void)sendKeyTyped:(uint16_t)key{

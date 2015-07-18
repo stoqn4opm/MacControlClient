@@ -152,7 +152,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * The interface may be specified by name (e.g. "en1" or "lo0") or by IP address (e.g. "192.168.4.34").
  * You may also use the special strings "localhost" or "loopback" to specify that
  * the socket only accept connections from the local machine.
- * 
+ *
  * You can see the list of interfaces via the command line utility "ifconfig",
  * or programmatically via the getifaddrs() function.
  * 

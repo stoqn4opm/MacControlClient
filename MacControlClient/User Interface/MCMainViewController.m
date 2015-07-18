@@ -17,9 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIGestureRecognizer *mouseGestureRecognizer = [UIGestureRecognizer new];
-    mouseGestureRecognizer.delegate = self;
-    [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
+//    UIGestureRecognizer *mouseGestureRecognizer = [UIGestureRecognizer new];
+//    mouseGestureRecognizer.delegate = self;
+//    [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
+    
 }
 
 #pragma mark - Touch Handling
@@ -30,18 +31,18 @@
     
     if (currentLocation.x > previousLocation.x) {
         // move x of the cursor one unit forward
-        [[AppManager sharedManager] sendMoveRightMessages:SENSITIVITY];
+        [[AppManager sharedManager] sendMoveRightMessage];
        }else if (currentLocation.x < previousLocation.x){
         // move x of the cursor one unit backward
-           [[AppManager sharedManager] sendMoveLeftMessages:SENSITIVITY];
+           [[AppManager sharedManager] sendMoveLeftMessage];
     }
     
     if (currentLocation.y > previousLocation.y) {
         // move y of the cursor one unit forward
-        [[AppManager sharedManager] sendMoveDownMessages:SENSITIVITY];
+        [[AppManager sharedManager] sendMoveDownMessage];
     }else if (currentLocation.y < previousLocation.y){
         // move y of the cursor one unit backward
-        [[AppManager sharedManager] sendMoveUpMessages:SENSITIVITY];
+        [[AppManager sharedManager] sendMoveUpMessage];
     }
 }
 

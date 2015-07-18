@@ -16,6 +16,8 @@
 		5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */; };
 		5EAB1E081B5AA01800422C63 /* MCToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */; };
 		5EAB1E0C1B5AAD9E00422C63 /* MCMouseClicksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1E0B1B5AAD9E00422C63 /* MCMouseClicksViewController.m */; };
+		5EAB1E111B5ACFC900422C63 /* MCMouseRightClick.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1E101B5ACFC900422C63 /* MCMouseRightClick.m */; };
+		5EAB1E161B5AD35900422C63 /* MCMouseLeftClick.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1E151B5AD35900422C63 /* MCMouseLeftClick.m */; };
 		90BDED041B4D519F00A281DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED031B4D519F00A281DF /* main.m */; };
 		90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED061B4D519F00A281DF /* AppDelegate.m */; };
 		90BDED0D1B4D519F00A281DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED0B1B4D519F00A281DF /* Main.storyboard */; };
@@ -51,6 +53,10 @@
 		5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCToolbarViewController.m; path = "User Interface/MCToolbar/MCToolbarViewController.m"; sourceTree = "<group>"; };
 		5EAB1E0A1B5AAD9E00422C63 /* MCMouseClicksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMouseClicksViewController.h; path = "User Interface/MCMouseClicks/MCMouseClicksViewController.h"; sourceTree = "<group>"; };
 		5EAB1E0B1B5AAD9E00422C63 /* MCMouseClicksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMouseClicksViewController.m; path = "User Interface/MCMouseClicks/MCMouseClicksViewController.m"; sourceTree = "<group>"; };
+		5EAB1E0F1B5ACFC900422C63 /* MCMouseRightClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMouseRightClick.h; path = "User Interface/MCMouseClicks/MCMouseRightClick.h"; sourceTree = "<group>"; };
+		5EAB1E101B5ACFC900422C63 /* MCMouseRightClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMouseRightClick.m; path = "User Interface/MCMouseClicks/MCMouseRightClick.m"; sourceTree = "<group>"; };
+		5EAB1E141B5AD35900422C63 /* MCMouseLeftClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMouseLeftClick.h; path = "User Interface/MCMouseClicks/MCMouseLeftClick.h"; sourceTree = "<group>"; };
+		5EAB1E151B5AD35900422C63 /* MCMouseLeftClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMouseLeftClick.m; path = "User Interface/MCMouseClicks/MCMouseLeftClick.m"; sourceTree = "<group>"; };
 		90BDECFE1B4D519F00A281DF /* MacControlClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacControlClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BDED021B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED031B4D519F00A281DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -114,8 +120,21 @@
 			children = (
 				5EAB1E0A1B5AAD9E00422C63 /* MCMouseClicksViewController.h */,
 				5EAB1E0B1B5AAD9E00422C63 /* MCMouseClicksViewController.m */,
+				5EAB1E0F1B5ACFC900422C63 /* MCMouseRightClick.h */,
+				5EAB1E101B5ACFC900422C63 /* MCMouseRightClick.m */,
+				5EAB1E141B5AD35900422C63 /* MCMouseLeftClick.h */,
+				5EAB1E151B5AD35900422C63 /* MCMouseLeftClick.m */,
 			);
 			name = "Mouse Clicks ";
+			sourceTree = "<group>";
+		};
+		5EAB1E0E1B5AC8BA00422C63 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				90BDED0E1B4D519F00A281DF /* Images.xcassets */,
+				5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		90BDECF51B4D519F00A281DF = {
@@ -181,13 +200,12 @@
 			isa = PBXGroup;
 			children = (
 				5EAB1E091B5AA01C00422C63 /* Toolbar */,
+				5EAB1E0D1B5AADB400422C63 /* Mouse Clicks  */,
 				90BDED3B1B4D7DEA00A281DF /* Main */,
 				90BDED3F1B4D7E3F00A281DF /* Settings */,
-				90BDED0E1B4D519F00A281DF /* Images.xcassets */,
-				5E76E6481B55742B00BFF407 /* Eurostile-Normal.ttf */,
+				5EAB1E0E1B5AC8BA00422C63 /* Resources */,
 				90BDED0B1B4D519F00A281DF /* Main.storyboard */,
 				90BDED101B4D519F00A281DF /* LaunchScreen.xib */,
-				5EAB1E0D1B5AADB400422C63 /* Mouse Clicks  */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -323,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */,
+				5EAB1E161B5AD35900422C63 /* MCMouseLeftClick.m in Sources */,
 				5E76E64C1B563DF300BFF407 /* MCSettingsViewController.m in Sources */,
 				5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */,
 				90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */,
@@ -331,6 +350,7 @@
 				5EAB1E0C1B5AAD9E00422C63 /* MCMouseClicksViewController.m in Sources */,
 				5EAB1E081B5AA01800422C63 /* MCToolbarViewController.m in Sources */,
 				5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */,
+				5EAB1E111B5ACFC900422C63 /* MCMouseRightClick.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,12 +25,7 @@
 
 
 -(void)viewDidLoad{
-    [self setupUserInteraction];
-}
-
-#pragma mark - Toolbar Actions
--(void)setupUserInteraction{
-
+    [super viewDidLoad];
     [self setupCloseButton];
     [self setupFullScreenButton];
     [self setupMinimizeButton];
@@ -39,6 +34,8 @@
     [self setupKeboardResignOnLostFocus];
 }
 
+
+#pragma mark - Toolbar Actions:
 #pragma mark Close Button
 -(void)setupCloseButton{
     [self.btnClose setUserInteractionEnabled:YES];
