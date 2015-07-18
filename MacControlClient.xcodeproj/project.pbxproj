@@ -14,6 +14,7 @@
 		5E7C8A0B1B5431EB009D4EDA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0A1B5431EB009D4EDA /* GCDAsyncSocket.m */; };
 		5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0D1B54322B009D4EDA /* AppManager.m */; };
 		5E7C8A111B543261009D4EDA /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */; };
+		5EAB1E081B5AA01800422C63 /* MCToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */; };
 		90BDED041B4D519F00A281DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED031B4D519F00A281DF /* main.m */; };
 		90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BDED061B4D519F00A281DF /* AppDelegate.m */; };
 		90BDED0D1B4D519F00A281DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BDED0B1B4D519F00A281DF /* Main.storyboard */; };
@@ -45,6 +46,8 @@
 		5E7C8A0D1B54322B009D4EDA /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppManager.m; path = "Application Manager/AppManager.m"; sourceTree = "<group>"; };
 		5E7C8A0F1B543261009D4EDA /* MCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMainViewController.m; path = "User Interface/MCMainViewController.m"; sourceTree = "<group>"; };
 		5E7C8A101B543261009D4EDA /* MCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMainViewController.h; path = "User Interface/MCMainViewController.h"; sourceTree = "<group>"; };
+		5EAB1E061B5AA01800422C63 /* MCToolbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCToolbarViewController.h; path = "User Interface/MCToolbar/MCToolbarViewController.h"; sourceTree = "<group>"; };
+		5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCToolbarViewController.m; path = "User Interface/MCToolbar/MCToolbarViewController.m"; sourceTree = "<group>"; };
 		90BDECFE1B4D519F00A281DF /* MacControlClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacControlClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BDED021B4D519F00A281DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BDED031B4D519F00A281DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,6 +95,15 @@
 				5E7C8A0D1B54322B009D4EDA /* AppManager.m */,
 			);
 			name = "Application Managment";
+			sourceTree = "<group>";
+		};
+		5EAB1E091B5AA01C00422C63 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				5EAB1E061B5AA01800422C63 /* MCToolbarViewController.h */,
+				5EAB1E071B5AA01800422C63 /* MCToolbarViewController.m */,
+			);
+			name = Toolbar;
 			sourceTree = "<group>";
 		};
 		90BDECF51B4D519F00A281DF = {
@@ -156,6 +168,7 @@
 		90BDED271B4D530100A281DF /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				5EAB1E091B5AA01C00422C63 /* Toolbar */,
 				90BDED3B1B4D7DEA00A281DF /* Main */,
 				90BDED3F1B4D7E3F00A281DF /* Settings */,
 				90BDED0E1B4D519F00A281DF /* Images.xcassets */,
@@ -302,6 +315,7 @@
 				90BDED071B4D519F00A281DF /* AppDelegate.m in Sources */,
 				90BDED041B4D519F00A281DF /* main.m in Sources */,
 				5E7C8A081B5431A6009D4EDA /* NSString+MCRegExp.m in Sources */,
+				5EAB1E081B5AA01800422C63 /* MCToolbarViewController.m in Sources */,
 				5E7C8A0E1B54322B009D4EDA /* AppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

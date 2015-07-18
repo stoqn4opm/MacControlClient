@@ -10,15 +10,7 @@
 #import "AppManager.h"
 #import "NSString+MCRegExp.h"
 
-@interface MCSettingsViewController () <UITextFieldDelegate>{
-    UITextField *_kbInvoker;
-}
-@property (weak, nonatomic) IBOutlet UIImageView *btnClose;
-@property (weak, nonatomic) IBOutlet UIImageView *btnMinimize;
-@property (weak, nonatomic) IBOutlet UIImageView *btnFullScreen;
-@property (weak, nonatomic) IBOutlet UIImageView *btnKeyboard;
-@property (weak, nonatomic) IBOutlet UIImageView *btnSettings;
-
+@interface MCSettingsViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtHost;
 @property (weak, nonatomic) IBOutlet UITextField *txtPort;
@@ -67,13 +59,11 @@
 #pragma mark - UI Prep methods
 -(void)setupUserInteraction{
     [self setupAutoConnectButton];
-    [self setupCloseButton];
-    [self setupFullScreenButton];
+
     [self setupLeftClickButton];
-    [self setupMinimizeButton];
+
     [self setupRightClickButton];
-    [self setupSetingsButton];
-    [self setupKeyboardButton];
+
     [self setupAddressInput];
     [self setupKeboardResignOnLostFocus];
     [self setupConnectButton];
@@ -98,58 +88,6 @@
     [self.btnRightClick addGestureRecognizer:leftClickTapped];
 }
 // End Mouse clicks ********************************************************************************
-
-// Toolbar Clicks **********************************************************************************
--(void) setupSetingsButton{
-    [self.btnSettings setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *settingsTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(settingsTappedAction)];
-    [settingsTapped setNumberOfTapsRequired:1];
-    [settingsTapped setNumberOfTouchesRequired:1];
-    [self.btnSettings addGestureRecognizer:settingsTapped];
-}
-
--(void)setupFullScreenButton{
-    [self.btnFullScreen setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *fullscreenTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullscreenWindowTappedAction)];
-    [fullscreenTapped setNumberOfTapsRequired:1];
-    [fullscreenTapped setNumberOfTouchesRequired:1];
-    [self.btnFullScreen addGestureRecognizer:fullscreenTapped];
-}
-
--(void)setupMinimizeButton{
-    [self.btnMinimize setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *minimizeTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(minimizeWindowTappedAction)];
-    [minimizeTapped setNumberOfTapsRequired:1];
-    [minimizeTapped setNumberOfTouchesRequired:1];
-    [self.btnMinimize addGestureRecognizer:minimizeTapped];
-}
-
--(void)setupCloseButton{
-    [self.btnClose setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *closeTapped =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeWindowTappedAction)];
-    [closeTapped setNumberOfTapsRequired:1];
-    [closeTapped setNumberOfTouchesRequired:1];
-    [self.btnClose addGestureRecognizer:closeTapped];
-}
-
--(void)setupKeyboardButton{
-    _kbInvoker = [UITextField new];
-    _kbInvoker.delegate = self;
-    [_kbInvoker setKeyboardAppearance:UIKeyboardAppearanceDark];
-    [self.view addSubview:_kbInvoker];
-    [_kbInvoker setText:@"dsas	"];
-    [self.btnKeyboard setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *keyboardInvoke =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardTappedAction)];
-    [keyboardInvoke setNumberOfTapsRequired:1];
-    [keyboardInvoke setNumberOfTouchesRequired:1];
-    [self.btnKeyboard addGestureRecognizer:keyboardInvoke];
-}
-// End Toolbar Clicks ******************************************************************************
 
 // Settings Body Clicks ****************************************************************************
 -(void)setupAutoConnectButton{
@@ -180,7 +118,7 @@
 -(void)setupKeboardResignOnLostFocus{
     [self.view setUserInteractionEnabled:YES];
     UITapGestureRecognizer *loseFocusRecognizer =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignAllRespondersForTextInput)];
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignRespondersForTextInput)];
     [loseFocusRecognizer setNumberOfTapsRequired:1];
     [loseFocusRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:loseFocusRecognizer];
@@ -238,14 +176,7 @@
 
 
 #pragma mark - User Interactions
--(void)settingsTappedAction{
-    [self.btnSettings setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.btnSettings setAlpha:1];
-    } completion:^(BOOL finished) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
-}
+
 
 -(void)leftClickTappedAction{
     [self.lblLeftClick setAlpha:0];
@@ -265,33 +196,6 @@
     }];
 }
 
--(void)fullscreenWindowTappedAction{
-    [self.btnFullScreen setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.btnFullScreen setAlpha:1];
-    }completion:^(BOOL finished) {
-        [[AppManager sharedManager] sendFullscreenWindowMessage];
-    }];
-}
-
--(void)minimizeWindowTappedAction{
-    [self.btnMinimize setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.btnMinimize setAlpha:1];
-    }completion:^(BOOL finished) {
-        [[AppManager sharedManager] sendMinimizeWindowMessage];
-    }];
-}
-
--(void)closeWindowTappedAction{
-    [self.btnClose setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.btnClose setAlpha:1];
-    }completion:^(BOOL finished) {
-        [[AppManager sharedManager] sendCloseWindowMessage];
-    }];
-}
-
 -(void)autoConnectTappedAction{
     [self.btnAutoConnect setAlpha:0];
     if ([self.btnAutoConnect.text isEqualToString:@"ON"]) {
@@ -308,33 +212,11 @@
     }];
 }
 
--(void)keyboardTappedAction{
-    [self.btnKeyboard setAlpha:0];
-    [UIView animateWithDuration:HIGHLIGHT_TIME animations:^{
-        [self.btnKeyboard setAlpha:1];
-    }completion:^(BOOL finished) {
 
-        if ([self.txtHost isFirstResponder] || [self.txtPort isFirstResponder]) {
-            [self resignRespondersForTextInput];
-            return;
-        }
-        if ([_kbInvoker isFirstResponder]) {
-            [_kbInvoker resignFirstResponder];
-        }else{
-            [_kbInvoker becomeFirstResponder];
-        }
-
-    }];
-}
 
 -(void)resignRespondersForTextInput{
     [self.txtHost resignFirstResponder];
     [self.txtPort resignFirstResponder];
-}
-
--(void)resignAllRespondersForTextInput{
-    [self resignRespondersForTextInput];
-    [_kbInvoker resignFirstResponder];
 }
 
 -(void)connectionTappedAction{
@@ -355,25 +237,6 @@
 
 
 #pragma mark - <UITextFieldDelegate> Methods
-- (BOOL)textField:(UITextField *)textField
-shouldChangeCharactersInRange:(NSRange)range
-replacementString:(NSString *)string{
-    if (textField == _kbInvoker) {
-        if (string.length > 0) {
-        [[AppManager sharedManager] sendKeyTyped:[string characterAtIndex:0]];
-        }
-        else{
-            // perform stupid hack in order to be able to send clear when _kbInvoker text is empty
-            // it will be fixed when i make my own custom keyboard which will directly send CGKeyCodes
-            [textField setText:@"hack"];
-            
-            // 8 is ASCII key code for backspace
-            [[AppManager sharedManager]sendKeyTyped:8];
-        }
-    }
-    return YES;
-}
-
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     if (textField == self.txtHost){
         if ([textField.text  matchesRegEx:IP_REGEX]) {
@@ -395,13 +258,7 @@ replacementString:(NSString *)string{
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
-    if (textField == _kbInvoker) {
-        // 13 is ASCII keycode for Carridge return
-        [[AppManager sharedManager] sendKeyTyped:13];
-    }
-    else{
-        [textField resignFirstResponder];
-    }
+    [textField resignFirstResponder];
     return YES;
 }
 @end
