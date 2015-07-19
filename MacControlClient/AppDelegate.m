@@ -17,23 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-  //  [[[AppManager sharedManager] clientSocket] connectToHost:@"200.200.200.234" onPort:PORT error:nil];
 
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveRightMessage];
-    }
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveUpMessage];
-    }
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveLeftMessage];
-    }
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveDownMessage];
-    }
-   //     char c = [@"dfggdfgsd" characterAtIndex:0];
-//    NSLog(@"%c",c);
     return YES;
 }
 

@@ -293,8 +293,6 @@
                         <outlet property="btnInstructions" destination="TNV-91-EcX" id="2ra-M9-6d1"/>
                         <outlet property="btnLoadHost" destination="6yG-Fv-ktA" id="kEL-OL-wVV"/>
                         <outlet property="btnSaveHost" destination="Qnw-GV-oqW" id="ltg-Kf-P44"/>
-                        <outlet property="lblEmail" destination="1u8-8F-b73" id="Otj-MS-w5m"/>
-                        <outlet property="lblMacControl" destination="3Mt-5W-Pnp" id="7jY-6C-hyu"/>
                         <outlet property="lblStatus" destination="A3s-ZA-xD2" id="zeb-PP-X6x"/>
                         <outlet property="txtHost" destination="u0R-NA-Ca4" id="Go1-Gk-KA2"/>
                         <outlet property="txtPort" destination="E1g-AD-fWB" id="dTC-W6-DDL"/>

@@ -57,20 +57,7 @@
         [self showAlertWithType:MCALERT_TYPE_INVALID_PORT_ENTERED];
         return;
     }
-//    [self.clientSocket connectToHost:host onPort:port error:nil];
     [self.clientSocket connectToHost:host onPort:port withTimeout:TIMEOUT error:nil];
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveRightMessage];
-    }
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveUpMessage];
-    }
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveLeftMessage];
-    }
-    for (int i = 0; i < 30; i++) {
-        [[AppManager sharedManager] sendMoveDownMessage];
-    }
 }
 
 -(void)disconnect{
@@ -81,49 +68,69 @@
 #pragma mark - Send Protocol Messages
 -(void)sendMoveUpMessage{
     for (int i = 0; i < SENSITIVITY; i++) {
-        [self.clientSocket writeData:[MOVE_UP_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+        [self.clientSocket writeData:[MOVE_UP_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                         withTimeout:TIMEOUT tag:0];
     }
 }
 
 -(void)sendMoveDownMessage{
     for (int i = 0; i < SENSITIVITY; i++) {
-        [self.clientSocket writeData:[MOVE_DOWN_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+        [self.clientSocket writeData:[MOVE_DOWN_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                         withTimeout:TIMEOUT tag:0];
     }
 }
 
 -(void)sendMoveLeftMessage{
     for (int i = 0; i < SENSITIVITY; i++) {
-        [self.clientSocket writeData:[MOVE_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+        [self.clientSocket writeData:[MOVE_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                         withTimeout:TIMEOUT tag:0];
     }
 }
 -(void)sendMoveRightMessage{
     for (int i = 0; i < SENSITIVITY; i++) {
-        [self.clientSocket writeData:[MOVE_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+        [self.clientSocket writeData:[MOVE_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                         withTimeout:TIMEOUT tag:0];
     }
 }
 
 -(void)sendLeftDownMessage{
-    [self.clientSocket writeData:[HOLD_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+    [self.clientSocket writeData:[HOLD_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                     withTimeout:TIMEOUT tag:0];
 }
 
 -(void)sendLeftUPMessage{
-    [self.clientSocket writeData:[RELEASE_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+    [self.clientSocket writeData:[RELEASE_LEFT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                     withTimeout:TIMEOUT tag:0];
 }
 
 -(void)sendRightDownMessage{
-    [self.clientSocket writeData:[HOLD_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+    [self.clientSocket writeData:[HOLD_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                     withTimeout:TIMEOUT tag:0];
 }
 
 -(void)sendRightUPMessage{
-    [self.clientSocket writeData:[RELEASE_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT tag:0];
+    [self.clientSocket writeData:[RELEASE_RIGHT_MESSAGE dataUsingEncoding:NSUTF8StringEncoding]
+                     withTimeout:TIMEOUT tag:0];
 }
 
 -(void)sendKeyTyped:(uint16_t)key{
     
     NSString *msg = [NSString stringWithFormat:@"%d\x0D\x0A",key];
-    [self.clientSocket writeData:[msg dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
+    [self.clientSocket writeData:[msg dataUsingEncoding:NSUTF8StringEncoding]
+                     withTimeout:TIMEOUT tag:0];
 }
 
+-(void)sendCloseWindowMessage{
+    
+}
+
+-(void)sendMinimizeWindowMessage{
+    
+}
+
+-(void)sendFullscreenWindowMessage{
+    
+}
 
 #pragma mark - Alerts
 -(void)showAlertWithType:(MCAlertType)aType{
@@ -157,6 +164,7 @@
     };
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Connected" object:self userInfo:notifInfo];
 }
+
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Disconnected" object:self];
 }

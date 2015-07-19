@@ -17,32 +17,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    UIGestureRecognizer *mouseGestureRecognizer = [UIGestureRecognizer new];
-//    mouseGestureRecognizer.delegate = self;
-//    [self.swipeField addGestureRecognizer:mouseGestureRecognizer];
-    
+
+    UIPanGestureRecognizer *panRecognizer =
+    [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panHandler:)];
+    [panRecognizer setDelegate:self];
+    [self.swipeField setUserInteractionEnabled:YES];
+    [self.swipeField addGestureRecognizer:panRecognizer];
 }
 
+
 #pragma mark - Touch Handling
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    CGPoint previousLocation = [self calculateMeanPreviousLocationFromTouches:touches];
-    CGPoint currentLocation  = [self calculateMeanLocationFromTouches:touches];
-    
-    if (currentLocation.x > previousLocation.x) {
-        // move x of the cursor one unit forward
-        [[AppManager sharedManager] sendMoveRightMessage];
-       }else if (currentLocation.x < previousLocation.x){
-        // move x of the cursor one unit backward
-           [[AppManager sharedManager] sendMoveLeftMessage];
+-(void) panHandler:(UIPanGestureRecognizer *) pan {
+    CGPoint velocity = [pan velocityInView:self.swipeField];
+    if (velocity.x > 0) {
+        [[AppManager sharedManager]sendMoveRightMessage];
+    }else if (velocity.x < 0){
+        [[AppManager sharedManager]sendMoveLeftMessage];
     }
-    
-    if (currentLocation.y > previousLocation.y) {
-        // move y of the cursor one unit forward
-        [[AppManager sharedManager] sendMoveDownMessage];
-    }else if (currentLocation.y < previousLocation.y){
-        // move y of the cursor one unit backward
-        [[AppManager sharedManager] sendMoveUpMessage];
+    if (velocity.y > 0) {
+        [[AppManager sharedManager]sendMoveDownMessage];
+    }else if (velocity.y < 0){
+        [[AppManager sharedManager]sendMoveUpMessage];
     }
 }
 
@@ -59,6 +54,7 @@ replacementString:(NSString *)string{
     }
     return YES;
 }
+
 
 #pragma mark - Touch Handling Helper functions
 -(CGPoint) calculateMeanPreviousLocationFromTouches:(NSSet *)touches{

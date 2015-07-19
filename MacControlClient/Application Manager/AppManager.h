@@ -11,10 +11,10 @@
 #import "GCDAsyncSocket.h"
 
 // Config
-#define TIMEOUT 50000
+#define TIMEOUT 5000
 #define PORT    2222
 #define IP_REGEX @"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-#define SENSITIVITY 10
+#define SENSITIVITY 7
 #define HIGHLIGHT_TIME 0.5f
 
 // Communication Protocol
@@ -28,7 +28,7 @@
 #define RELEASE_LEFT_MESSAGE    @"click:left=0\x0D\x0A"
 #define HOLD_RIGHT_MESSAGE      @"click:right=1\x0D\x0A"
 #define RELEASE_RIGHT_MESSAGE   @"click:right=0\x0D\x0A"
-// Keyboard messages are in form: aaa\x0D\x0A where aaa  - UTF8 char code
+// Keyboard messages are in form: aaa\x0D\x0A where aaa  - ASCII char code
 
 
 // Alert types used in showAlertWithType:

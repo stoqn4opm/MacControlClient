@@ -11,7 +11,7 @@
 #import "MCMouseRightClick.h"
 #import "MCMouseLeftClick.h"
 
-@interface MCMouseClicksViewController ()
+@interface MCMouseClicksViewController () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *leftLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightLabel;
 @property (weak, nonatomic) IBOutlet MCMouseLeftClick *leftField;
